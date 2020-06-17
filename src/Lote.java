@@ -1,9 +1,16 @@
 
 public class Lote extends Cova{
-
+	String IDLote;
+	int MaxQuantCovas;
+	int LotacaoAtual;
+	
 	Lote(String Nome) {
 		super(Nome);
-		// TODO Auto-generated constructor stub
+		this.IDLote = Nome;
+	}
+	
+	Lote(int Quant){
+		this.MaxQuantCovas = Quant;
 	}
 
 }
