@@ -19,7 +19,38 @@ public class Cova extends Dados{
 		return r;
 	}
 	
+	public void setPosX(int pos) {
+		this.posX = pos;
+	}
 	
+	public void setPosY(int pos) {
+		this.posY = pos;
+	}
 	
+	public void setID(String id) {
+		this.Id = id;
+	}
+	
+	public void setLote(String lote) {
+		this.Lote = lote;
+	}
 
+	public int getPosX() {
+		return this.posX;
+	}
+	
+	public int getPosY() {
+		return this.posY;
+	}
+	
+	public String getLote() {
+		return this.Lote;
+	}
+	
+	public void createID() {
+		String nome = this.getLote() + this.getPosX() + this.getPosY();
+		setID(nome);
+	}
+	
+	
 }
