@@ -12,6 +12,15 @@ public class Dados {
 		this.Nome = Nome;
 	}
 	
+
+	public  String toString() {
+		String r = "Nome: " + this.Nome + " "+ this.Sobrenome + "\nCPF: "+
+					this.CPF + "\nNome do Familiar: "+ this.NomeParente + "\nEndereco: " + this.Endereco 
+					+ "\nData de Nascimento: " + this.DataDeNascimento + "\nTelefone: " + this.Telefone + "\n";	
+		return r;
+	}
+	
+	
 	public void setNome(String Nome) {
 		this.Nome = Nome;
 	}
