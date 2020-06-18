@@ -8,7 +8,13 @@ public class Cova extends Dados{
 		
 	Cova(String Nome) {
 		super(Nome);
-		
+			
+	}
+	
+	Cova(String Nome,String id, String lote){
+		super(Nome);
+		this.Lote = lote;
+		this.Id = id;
 	}
 	
 	public  String toString() {
