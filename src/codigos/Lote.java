@@ -1,3 +1,4 @@
+package codigos;
 
 public class Lote extends Cova{
 	String IDLote;

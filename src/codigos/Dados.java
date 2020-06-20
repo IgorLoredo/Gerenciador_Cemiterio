@@ -1,3 +1,5 @@
+package codigos;
+
 
 public class Dados {
 	String Nome;
