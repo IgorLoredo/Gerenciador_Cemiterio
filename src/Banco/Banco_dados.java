@@ -6,19 +6,13 @@ import java.sql.Statement;
 
 public class Banco_dados {
 	
-	
+	private ConexaoSQLite conxaoSQLite;
+
 	private String NOME_TABELA;
 	
-	public Boolean criarBanco(String nomeBanco, String tabela) {
-		String sql = "CREATE TABLE IF NOT EXISTS " +
-						this.NOME_TABELA
-						+ "(" 
-						+ "id text PRIMARY KEY,"
-						+ "nome";
-		return true;
+	public ConexaoSQLite getConxaoSQLite() {
+		return conxaoSQLite;
 	}
-	
-	
 	
 	public String getNOME_TABELA() {
 		return this.NOME_TABELA;
@@ -28,8 +22,30 @@ public class Banco_dados {
 		this.NOME_TABELA = nOME_TABELA;
 	}
 	
-
+	public Boolean criarBanco(String nomeBanco, String tabela) {
+		
+		String sql = "CREATE TABLE IF NOT EXISTS " +
+						this.NOME_TABELA
+						+ "(" 
+						+ "id text PRIMARY KEY,"
+						+ "Nome text NOT NULL,"
+						+ "Sobrenome text NOT NULL,"
+						+ "CPF text NOT NULL,"
+						+ "NomeParente text NOT NULL,"
+						+ "DataNascimento text NOT NULL,"
+						+ "Endereco text NOT NULL,"
+						+ "Lote text NOT NULL,"
+						+ "PosX integer,"
+						+ "PosY integer,"
+						+ "DataEnterro integer,"
+						+ ");";
+		
+		boolean contectou = false;
+		
+		return true;
+	}
 	
+		
 	
 }
 

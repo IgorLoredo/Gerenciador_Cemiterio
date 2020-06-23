@@ -39,10 +39,8 @@ public class ConexaoSQLite {
 		 return true;
 	 }
 	 
-	
-	
 		/// é o criar o sql
-	public Statement CriarStatement() {
+	public Statement criarStatement() {
 		try {
 				return this.conecao.createStatement();
 		}catch(SQLException e) {
@@ -58,6 +56,7 @@ public class ConexaoSQLite {
 			return null;
 		}
 	}
+	
 	public  Connection getConcecao() {
 		return this.conecao;
 	}
