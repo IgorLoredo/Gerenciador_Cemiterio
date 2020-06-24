@@ -1,6 +1,5 @@
 package Banco;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -26,7 +25,7 @@ public class Banco_dados {
 		return this.conxaoSQLite.criarPreparedState(sql);
 	}
 	
-	public Boolean criarTabela(String banco,String tabela) {
+	public Boolean criarTabela(String tabela) {
 		setNOME_TABELA(tabela);
 		String sql = "CREATE TABLE IF NOT EXISTS " +
 						Banco_dados.NOME_TABELA
@@ -46,10 +45,10 @@ public class Banco_dados {
 		
 		boolean contectou = false;
 		try {
-			contectou = this.conxaoSQLite.contectar(banco);
+			contectou = this.conxaoSQLite.contectar();
 			Statement stmt = this.conxaoSQLite.criarStatement();
 			stmt.execute(sql);
-			System.out.println("Banco criado"+ banco +"com a tabela"+ tabela);
+			System.out.println("Banco criado "+ "com a tabela"+ tabela);
 		} catch (SQLException e) {
 			return false;
 			

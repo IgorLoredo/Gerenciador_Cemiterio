@@ -5,14 +5,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;  
+
 
 public class ConexaoSQLite {
 	 Connection conecao;
 	 // conctando ao banco de dados passando o nome do arquivo
-	 public boolean contectar(String nome_Banco) {
+	 public boolean contectar() {
 		
-		 try {
-			 String url = "jdbc:sqlite:banco_dados/"+nome_Banco;
+		 try { 
+			 
+			 String url = "jdbc:sqlite:banco_dados/banco.db";
 			 this.conecao = DriverManager.getConnection(url);
 			 System.out.println("Conectando banco ...");
 		} catch (SQLException e) {
