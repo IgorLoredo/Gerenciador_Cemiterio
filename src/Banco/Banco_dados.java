@@ -21,6 +21,7 @@ public class Banco_dados {
 		Banco_dados.NOME_TABELA = nOME_TABELA;
 	}
 	
+	@SuppressWarnings("exports")
 	public Statement criarPreparedState(String sql) {
 		return this.conxaoSQLite.criarPreparedState(sql);
 	}
@@ -29,7 +30,7 @@ public class Banco_dados {
 		setNOME_TABELA(tabela);
 		String sql = "CREATE TABLE IF NOT EXISTS " +
 						Banco_dados.NOME_TABELA
-						+ "(" 
+						+ " (" 
 						+ "id text PRIMARY KEY,"
 						+ "Nome text NOT NULL,"
 						+ "Sobrenome text NOT NULL,"
