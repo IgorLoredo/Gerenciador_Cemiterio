@@ -6,12 +6,12 @@ public class Cova extends Dados{
 	String Id;
 	String Lote;
 		
-	Cova(String Nome) {
+	public Cova(String Nome) {
 		super(Nome);
 			
 	}
 	
-	Cova(String Nome,String id, String lote){
+	public Cova(String Nome,String id, String lote){
 		super(Nome);
 		this.Lote = lote;
 		this.Id = id;
