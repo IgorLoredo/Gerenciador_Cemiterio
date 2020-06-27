@@ -13,14 +13,11 @@ public class ConexaoSQLite {
 	 // conctando ao banco de dados passando o nome do arquivo
 	 public boolean contectar() {
 		
-		 try { 
-			 if(this.conecao.isClosed() == true) {
+		 try { 		
 				 String url = "jdbc:sqlite:banco_dados/banco.db";
 				 this.conecao = DriverManager.getConnection(url);
-				 System.out.println("Conectando banco ...");
-				 
-			 }
-			 	
+				 System.out.println("Conectando banco ...");					 
+	
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 			System.out.println("Erro ao conectar com banco de dados...");
@@ -46,6 +43,7 @@ public class ConexaoSQLite {
 	 }
 	 
 		/// é o criar o sql
+	@SuppressWarnings("exports")
 	public Statement criarStatement() {
 		try {
 				return this.conecao.createStatement();

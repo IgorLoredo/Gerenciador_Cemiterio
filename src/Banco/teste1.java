@@ -1,10 +1,6 @@
 package Banco;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import codigos.Cova;
 
 public class teste1 {
 
@@ -15,7 +11,7 @@ public class teste1 {
 		Banco_dados banco = new Banco_dados();
 //		con.contectar();
 //		con.descontectar();
-		banco.criarTabela("tbl_pessoa");
+		banco.criarTabela();
 //		String sql = "SELECT * FROM tbl_pessoa " +
 //				"WHERE id = ?;";
 //		banco.criarPreparedState(sql);
