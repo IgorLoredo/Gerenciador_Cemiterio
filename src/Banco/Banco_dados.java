@@ -44,8 +44,9 @@ public class Banco_dados {
 						+ "DataEnterro integer,"
 						+ ");";
 		
-		boolean contectou = false;
+		boolean contectou = true;
 		try {
+			
 			contectou = this.conxaoSQLite.contectar();
 			Statement stmt = this.conxaoSQLite.criarStatement();
 			stmt.execute(sql);

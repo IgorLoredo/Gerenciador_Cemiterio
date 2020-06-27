@@ -14,17 +14,20 @@ public class ConexaoSQLite {
 	 public boolean contectar() {
 		
 		 try { 
-			 
-			 String url = "jdbc:sqlite:banco_dados/banco.db";
-			 this.conecao = DriverManager.getConnection(url);
-			 System.out.println("Conectando banco ...");
+			 if(this.conecao.isClosed() == true) {
+				 String url = "jdbc:sqlite:banco_dados/banco.db";
+				 this.conecao = DriverManager.getConnection(url);
+				 System.out.println("Conectando banco ...");
+				 
+			 }
+			 	
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 			System.out.println("Erro ao conectar com banco de dados...");
 			return false;
 		}
 		 
-		 return true;
+		return true;
 	 }
 	 
 	 // desconando do bando sem passar o nome
@@ -52,6 +55,7 @@ public class ConexaoSQLite {
 		}
 	}
 	
+	@SuppressWarnings("exports")
 	public PreparedStatement criarPreparedState(String sql) {
 		try {
 			return this.conecao.prepareStatement(sql);
