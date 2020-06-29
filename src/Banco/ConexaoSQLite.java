@@ -56,6 +56,7 @@ public class ConexaoSQLite {
 	@SuppressWarnings("exports")
 	public PreparedStatement criarPreparedState(String sql) {
 		try {
+			this.contectar();
 			return this.conecao.prepareStatement(sql);
 		} catch (SQLException e) {
 			return null;

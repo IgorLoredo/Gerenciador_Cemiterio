@@ -7,18 +7,8 @@ public class Banco_dados {
 	
 	private final ConexaoSQLite conxaoSQLite = new ConexaoSQLite();
 
-	private static String NOME_TABELA;
-	
 	public ConexaoSQLite getConxaoSQLite() {
 		return conxaoSQLite;
-	}
-	
-	public String getNOME_TABELA() {
-		return Banco_dados.NOME_TABELA;
-	}
-	
-	public void setNOME_TABELA(String nOME_TABELA) {
-		Banco_dados.NOME_TABELA = nOME_TABELA;
 	}
 	
 	@SuppressWarnings("exports")
@@ -27,7 +17,7 @@ public class Banco_dados {
 	}
 	
 	public Boolean criarTabela(String tabela) {
-		
+		// criando tabela
 		String sql = "CREATE TABLE IF NOT EXISTS " + tabela
 						+ "(" 
 						+ "id text PRIMARY KEY,"
