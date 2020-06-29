@@ -26,9 +26,9 @@ public class Banco_dados {
 		return this.conxaoSQLite.criarPreparedState(sql);
 	}
 	
-	public Boolean criarTabela() {
+	public Boolean criarTabela(String tabela) {
 		
-		String sql = "CREATE TABLE IF NOT EXISTS tbl_pessoa "
+		String sql = "CREATE TABLE IF NOT EXISTS " + tabela
 						+ "(" 
 						+ "id text PRIMARY KEY,"
 						+ "Nome text NOT NULL,"
@@ -49,7 +49,7 @@ public class Banco_dados {
 			contectou = this.conxaoSQLite.contectar();
 			Statement stmt = this.conxaoSQLite.criarStatement();
 			stmt.execute(sql);
-			System.out.println("Banco criado "+ "com a tabela");
+			System.out.println("Banco criado com a tabela " +tabela);
 			
 		} catch (SQLException e) {
 			return false;

@@ -10,7 +10,7 @@ public class teste1 {
 		ConexaoSQLite con = new ConexaoSQLite();
 		Banco_dados banco = new Banco_dados();
 		
-		System.out.println(banco.criarTabela()); 
+		System.out.println(banco.criarTabela("funcionarios")); 
 		
 		
 //		String sql = "SELECT * FROM tbl_pessoa " +
