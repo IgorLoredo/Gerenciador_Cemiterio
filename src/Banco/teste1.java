@@ -29,10 +29,19 @@ public class teste1 {
 		Cova cova1 = new Cova("igor");
 		Cova cova2 = new Cova("noem");
 		cova1.setCPF("1111");
+		cova1.setPosX(11);
+		cova1.setPosY(11);
 		
+//		String slqInsert = " INSERT INTO tbl_pessoa ("
+//				+ "id,"
+//				+ "nome,"
+//				+ "idpro"
+//				+ ") VALUES (?,?,?)"
+//				+ ";";
+				
 		String sqlInsert = " INSERT INTO tbl_pessoa ("
 				+ "id,"
-				+ "nome,"
+				+ "Nome,"
 				+ "Sobrenome,"
 				+ "CPF,"
 				+ "NomeParente,"
@@ -41,22 +50,28 @@ public class teste1 {
 				+ "Lote,"
 				+ "PosX,"
 				+ "PosY,"				
-				+ "DataEnterro,"
+				+ "DataEnterro"
 				+ ") VALUES (?,?,?,?,?,?,?,?,?,?,?)"
 				+ ";";		
 				
 		PreparedStatement nova = con.criarPreparedState(sqlInsert);
-		nova.setString(1, cova1.getCPF());
+		nova.setInt(1, cova1.getPosX());
 		nova.setString(2,cova1.getNome());
 		nova.setString(3, cova1.getCPF());
 		nova.setString(4, cova1.getCPF());
 		nova.setString(5, cova1.getCPF());
 		nova.setString(6, cova1.getCPF());
 		nova.setString(7, cova1.getCPF());
-		nova.setString(8, cova1.getCPF());
+		nova.setLong(8, cova1.getPosY());
+		nova.setLong(9, cova1.getPosX());
+		nova.setString(10, cova1.getCPF());	
 		
-				
-		nova.executeUpdate();
+		int foi = nova.executeUpdate();
+		if(foi == 1) {
+			System.out.println("igor");
+		}else {
+			System.out.println("fffff");
+		}
 	}
 
 }
