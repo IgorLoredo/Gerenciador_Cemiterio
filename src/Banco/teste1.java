@@ -9,9 +9,10 @@ public class teste1 {
 		
 		ConexaoSQLite con = new ConexaoSQLite();
 		Banco_dados banco = new Banco_dados();
-//		con.contectar();
-//		con.descontectar();
-		banco.criarTabela();
+		
+		System.out.println(banco.criarTabela()); 
+		
+		
 //		String sql = "SELECT * FROM tbl_pessoa " +
 //				"WHERE id = ?;";
 //		banco.criarPreparedState(sql);

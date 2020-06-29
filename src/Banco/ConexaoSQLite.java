@@ -62,6 +62,7 @@ public class ConexaoSQLite {
 		}
 	}
 	
+	@SuppressWarnings("exports")
 	public  Connection getConcecao() {
 		return this.conecao;
 	}

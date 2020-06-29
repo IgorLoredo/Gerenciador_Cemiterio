@@ -5,7 +5,7 @@ import java.sql.Statement;
 
 public class Banco_dados {
 	
-	private ConexaoSQLite conxaoSQLite;
+	private final ConexaoSQLite conxaoSQLite = new ConexaoSQLite();
 
 	private static String NOME_TABELA;
 	
@@ -28,7 +28,8 @@ public class Banco_dados {
 	
 	public Boolean criarTabela() {
 		
-		String sql = "CREATE TABLE IF NOT EXISTS tbl_pessoa (" 
+		String sql = "CREATE TABLE IF NOT EXISTS tbl_pessoa "
+						+ "(" 
 						+ "id text PRIMARY KEY,"
 						+ "Nome text NOT NULL,"
 						+ "Sobrenome text NOT NULL,"
@@ -39,7 +40,7 @@ public class Banco_dados {
 						+ "Lote text NOT NULL,"
 						+ "PosX integer,"
 						+ "PosY integer,"
-						+ "DataEnterro integer,"
+						+ "DataEnterro integer"
 						+ ");";
 		
 		boolean contectou = false;
@@ -48,7 +49,8 @@ public class Banco_dados {
 			contectou = this.conxaoSQLite.contectar();
 			Statement stmt = this.conxaoSQLite.criarStatement();
 			stmt.execute(sql);
-//			System.out.println("Banco criado "+ "com a tabela"+ tabela);
+			System.out.println("Banco criado "+ "com a tabela");
+			
 		} catch (SQLException e) {
 			return false;
 			
