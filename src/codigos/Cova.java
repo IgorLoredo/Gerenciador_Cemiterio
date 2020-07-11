@@ -1,28 +1,26 @@
 package codigos;
 
-
-public class Cova extends Dados{
+public class Cova{
 	int posX,posY;
 	String Id;
 	String Lote;
 		
-	public Cova(String Nome) {
-		super(Nome);
+	public Cova() {
 			
 	}
 	
 	public Cova(String Nome,String id, String lote){
-		super(Nome);
 		this.Lote = lote;
 		this.Id = id;
 	}
 	
-	public  String toString() {
-		String r = "Nome: " + this.Nome + " "+ this.Sobrenome + "\nCPF: "+
-					this.CPF + "\nNome do Familiar: "+ this.NomeParente + "\nEndereco: " + this.Endereco 
-					+ "\nData de Nascimento: " + this.DataDeNascimento + "\nTelefone: " + this.Telefone
-					+ "\nID: " + this.Id + "\n";	
-		return r;
+	@Override
+	public String toString() {
+		/*String r = "Nome: " + this.nome + " "+ this.sobrenome + "\nCPF: "+
+					this.CPF + "\nNome do Familiar: " + "\nEndereco: " + this.endereco 
+					+ "\nData de Nascimento: " + this.dataDeNascimento + "\nTelefone: " + this.telefone
+					+ "\nID: " + this.Id + "\n";*/
+		return "";
 	}
 	
 	public void setPosX(int pos) {

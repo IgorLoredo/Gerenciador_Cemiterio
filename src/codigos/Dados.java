@@ -1,82 +1,58 @@
 package codigos;
 
-
-public class Dados {
-	String Nome;
-	String Sobrenome;
+public abstract class Dados {
+	String nome;
+	String sobrenome;
 	String CPF;
-	String NomeParente;
-	String Endereco;
-	String DataDeNascimento;
-	int Telefone;
+	String dataDeNascimento;
 	
-	Dados(String Nome){
-		this.Nome = Nome;
+	Dados(String nome, String sobrenome, String CPF, String dataDeNascimento){
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.CPF = CPF;
+		this.dataDeNascimento = dataDeNascimento;
 	}
 
 
 	public  String toString() {
-		String r = "Nome: " + this.Nome + " "+ this.Sobrenome + "\nCPF: "+
-					this.CPF + "\nNome do Familiar: "+ this.NomeParente + "\nEndereco: " + this.Endereco 
-					+ "\nData de Nascimento: " + this.DataDeNascimento + "\nTelefone: " + this.Telefone + "\n";	
+		String r = "nome: " + this.nome + " "+ this.sobrenome + "\nCPF: "+
+				this.CPF + "\nnome do Familiar: " + "\nData de Nascimento: " 
+				+ this.dataDeNascimento + "\ntelefone: ";	
 		return r;
 	}
 	
 	
-	public void setNome(String Nome) {
-		this.Nome = Nome;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
-	public void setSobrenome(String Sobrenome) {
-		this.Sobrenome = Sobrenome;
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
 	
 	public void setCPF(String CPF) { 
 		this.CPF = CPF;
 	}
-	
-	public void setNomeParente(String Parente) {
-		this.NomeParente = Parente;
-	}
-	
-	public void setEndereco(String Endereco) {
-		this.Endereco = Endereco;
-	}
-	
+
 	public void setDataDeNascimento(String Data) {
-		this.DataDeNascimento = Data;
-	}
-	
-	public void setTelefone(int telefone) {
-		this.Telefone = telefone;
+		this.dataDeNascimento = Data;
 	}
 	
 	public String getNome() {
-		return this.Nome;
+		return this.nome;
 	}
 	
 	public String getSobrenome() {
-		return this.Sobrenome;
+		return this.sobrenome;
 	}
 
 	public String getCPF() {
 		return this.CPF;
 	}
-	
-	public String getNomeParente() {
-		return this.NomeParente;
-	}
-	
-	public String getEndereco() {
-		return this.Endereco;
-	}
+
 	
 	public String setDataDeNascimento() {
-		return this.DataDeNascimento;
+		return this.dataDeNascimento;
 	}
-	
-	public int getTelefone() {
-		return this.Telefone;
-	}
-	
+		
 }
