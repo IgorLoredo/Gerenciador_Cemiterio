@@ -6,7 +6,7 @@ public class Lote extends Cova{
 	int LotacaoAtual;
 	
 	Lote(String Nome) {
-		super(Nome);
+		super(Nome, Nome, Nome);
 		this.IDLote = Nome;
 		// padrao
 		this.MaxQuantCovas = 100;
@@ -14,7 +14,7 @@ public class Lote extends Cova{
 	}
 	
 	Lote(String IDLote,int Quant){
-		super(IDLote);
+		super(IDLote, IDLote, IDLote);
 		this.MaxQuantCovas = Quant;
 		this.LotacaoAtual = 0;
 	}
