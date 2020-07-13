@@ -1,8 +1,8 @@
 package codigos;
 
 public class Contato extends Dados {
-	String telefone;
-	Endereco endereco;
+	public String telefone;
+	public Endereco endereco;
 	
 	public Contato(String nome, String sobrenome,
 			String CPF, String dataDeNascimento,

@@ -49,9 +49,8 @@ public abstract class Dados {
 	public String getCPF() {
 		return this.CPF;
 	}
-
 	
-	public String setDataDeNascimento() {
+	public String getDataDeNascimento() {
 		return this.dataDeNascimento;
 	}
 		

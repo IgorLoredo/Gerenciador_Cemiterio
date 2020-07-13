@@ -5,11 +5,12 @@ public class Cova{
 	int posX,posY;
 	String Id;
 	String Lote;
-		
+	
 	public Cova(Finado user,int posX,int posY) {
 			this.finado = user;
 			this.posX = posX;
 			this.posY = posY;
+			
 	}
 	
 	public Cova(String Nome,String id, String lote){
