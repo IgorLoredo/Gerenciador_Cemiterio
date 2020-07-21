@@ -15,6 +15,7 @@ public class ManipularCSV {
 			
 		} catch (Exception e) {
 			System.out.println("ERRO LEITURA");
+			e.printStackTrace();
 		}
 		
 	}
@@ -25,9 +26,12 @@ public class ManipularCSV {
 			 fileWriter = new FileWriter(path);
 			 fileWriter.append("ID,nome, sobrenome,CPF,dataDeNascimento,telefone,Endereco,Lote,posX,posY\n");
 			 
+			 // escrendo
+			 
 			 
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("ERRO ESCRITA!!");
+			 e.printStackTrace();
 		}finally {
 			try { 
 				fileWriter.flush();
