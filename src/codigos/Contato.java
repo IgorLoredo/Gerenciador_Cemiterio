@@ -1,15 +1,18 @@
 package codigos;
 
 public class Contato extends Dados {
-	public String telefone;
-	public Endereco endereco;
+	String telefone;
+	String grauParentesco;
+	Endereco endereco;
 	
 	public Contato(String nome, String sobrenome,
 			String CPF, String dataDeNascimento,
-			String telefone, String estado,
+			String telefone, String grauParentesco, String estado,
 			String cidade, String rua, String num) 
 	{
 		super(nome, sobrenome, CPF, dataDeNascimento);
+		this.telefone = telefone;
+		this.grauParentesco = grauParentesco;
 		endereco = new Endereco(estado, cidade, rua, num);
 		
 	}
