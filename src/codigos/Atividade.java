@@ -15,5 +15,5 @@ public class Atividade {
 		this.tipo = tipo;
 	}
 	
-	// Incluir sets e gets
+	
 }

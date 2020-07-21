@@ -32,5 +32,6 @@ public abstract class Funcionario extends Dados{
 		this.dataContratacao = dataContratacao;
 	}
 	
+	
 
 }
