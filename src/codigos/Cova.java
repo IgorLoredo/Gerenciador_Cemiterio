@@ -18,6 +18,12 @@ public class Cova{
 		this.Id = id;
 	}
 	
+	public Cova() {
+		// TODO Auto-generated constructor stub
+		this.finado = null;
+	}
+	
+
 	@Override
 	public String toString() {
 		/*String r = "Nome: " + this.nome + " "+ this.sobrenome + "\nCPF: "+

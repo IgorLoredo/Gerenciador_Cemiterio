@@ -6,6 +6,13 @@ public abstract class Dados {
 	String CPF;
 	String dataDeNascimento;
 	
+	public Dados() {
+		this.nome = null;
+		this.sobrenome = null;
+		this.CPF = null;
+		this.dataDeNascimento = null;
+	}
+	
 	Dados(String nome, String sobrenome, String CPF, String dataDeNascimento){
 		this.nome = nome;
 		this.sobrenome = sobrenome;

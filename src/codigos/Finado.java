@@ -10,5 +10,7 @@ public class Finado extends Dados {
 		super(nome, sobrenome, CPF, dataDeNascimento);
 		this.contato = contato;
 	}
+	
+	
 
 }
