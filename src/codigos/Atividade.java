@@ -1,5 +1,7 @@
 package codigos;
 
+import java.io.IOException;
+
 public class Atividade {
 	private String titulo;
 	private String descricao;
@@ -15,5 +17,54 @@ public class Atividade {
 		this.tipo = tipo;
 	}
 	
+	
+	public void preenherAtividade() throws IOException {
+		String aux;
+		System.out.println("Titulo: ");
+		aux = EntradaTeclado.leString();
+		this.titulo = aux;
+		
+		System.out.println("Descrição: ");
+		aux = EntradaTeclado.leString();
+		this.descricao = aux;
+		
+		System.out.println("Data: ");		
+		aux = EntradaTeclado.leString();
+		this.data = aux;
+		
+		System.out.println("Horario: ");
+		aux = EntradaTeclado.leString();
+		this.horario = aux;
+		
+		System.out.println("Tipo: ");
+		aux = EntradaTeclado.leString();
+		this.tipo = aux;
+		
+	}
+	
+	
+	public String getTitulo() {
+		return this.titulo;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+
+	public String getData() {
+		return this.data;
+	}
+
+
+	public String getHorario() {
+		return this.horario;
+	}
+
+
+	public String getTipo() {
+		return this.tipo;
+	}
 	
 }
