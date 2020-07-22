@@ -1,17 +1,17 @@
 package codigos;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TesteMain {
 
-	public static <E> void main(String[] args) {
-			ArrayList <Cova> lista = new ArrayList<>();
-			Cova NewCova = new Cova();
-			NewCova.finado.setNome("igor");
-			lista.add(NewCova);
-			ManipularCSV.escreveCSV("aquivo.csv", lista);
+	public static <E> void main(String[] args) throws IOException {
+			ArrayList <Atividade> lista = new ArrayList<>();		
+			
+			
+//			ManipularCSV.EscreverAtividade("arqAtividae.csv", lista);
 //			ManipularCSV.leCSV(nomeArquivo, lista);
-
+			ManipularCSV.LeituraAtividade("arqAtividae.csv", lista);
 	}
 
 }

@@ -17,6 +17,13 @@ public class Atividade {
 		this.tipo = tipo;
 	}
 	
+	public Atividade() {				
+		this.titulo = null;
+		this.descricao = null;
+		this.data = null;
+		this.horario = null;
+		this.tipo = null;
+	}
 	
 	public void preenherAtividade() throws IOException {
 		String aux;
