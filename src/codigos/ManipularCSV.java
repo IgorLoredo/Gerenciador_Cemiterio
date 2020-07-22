@@ -113,12 +113,16 @@ public class ManipularCSV {
 			} catch (Exception e2) {
 				System.out.println("ERRO FECHAR ARQUIVO");
 			}
-		}
-		
-		
-		
-		
+		}		
 		
 	}
+	
+	public static void EscritaFuncionariosCSV(String pathFun, ArrayList<Funcionario> ListaFuncionarios ) {
+			FileReader fileRead = null;
+			try {
+				 fileWriter = new FileWriter(pathFun);
+			}
+			
+		}
 		
 }
