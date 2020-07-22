@@ -21,6 +21,8 @@ import java.awt.Color;
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Busca extends JFrame {
 
@@ -29,6 +31,8 @@ public class Busca extends JFrame {
 	private DefaultTableModel tableModel;
 	private JTextArea txtrDigiteAqui;
 	private boolean verificaTexto = false;
+	private JButton btnAplicar;
+	private JButton btnVoltar;
 
 	/**
 	 * Launch the application.
@@ -59,6 +63,7 @@ public class Busca extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 500);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
@@ -72,11 +77,17 @@ public class Busca extends JFrame {
 		txtrDigiteAqui.setFont(new Font("Dialog", Font.PLAIN, 16));
 		txtrDigiteAqui.setText("Digite aqui");
 		
-		JButton btnAplicar = new JButton("Aplicar");
+		btnAplicar = new JButton("Aplicar");
+		
 		btnAplicar.setForeground(new Color(0, 0, 0));
 		btnAplicar.setFont(new Font("Dialog", Font.BOLD, 14));
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
+		
+		btnVoltar = new JButton("Voltar");
+		
+		btnVoltar.setForeground(Color.BLACK);
+		btnVoltar.setFont(new Font("Dialog", Font.BOLD, 14));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -90,7 +101,9 @@ public class Busca extends JFrame {
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
 							.addGap(13)
 							.addComponent(txtrDigiteAqui, GroupLayout.PREFERRED_SIZE, 336, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+							.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
 							.addComponent(btnAplicar, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
@@ -102,7 +115,8 @@ public class Busca extends JFrame {
 							.addGap(9)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(txtrDigiteAqui, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-								.addComponent(btnAplicar)))
+								.addComponent(btnAplicar)
+								.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -145,6 +159,18 @@ public class Busca extends JFrame {
 					txtrDigiteAqui.setText("");
 					verificaTexto = true;
 				}
+			}
+		});
+		
+		btnAplicar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
+		btnVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Busca.this.dispose();
 			}
 		});
 	}
