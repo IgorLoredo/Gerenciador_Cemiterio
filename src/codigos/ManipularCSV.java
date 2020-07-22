@@ -91,22 +91,32 @@ public class ManipularCSV {
 		}
 	}
 	
-	
 	public static void LeituraAtividade(String path, ArrayList<Atividade> Lista) throws IOException {
+		String csvSqlite = ";";
+		String line = "";
 		FileWriter fileWriter = null;		
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
-		String linha = " ";
-		while (true) {
-		    if (linha != null) {
-		        System.out.println(linha);
 		
-		    } else
-		        break;
-		    linha = buffRead.readLine();
-		  
+		try {	
+			while((line = buffRead.readLine()) != null) {
+				// leitura das atividades
+				String [] state = line.split(csvSqlite);
+				Atividade ativ = new Atividade(state[0], state[1], state[2],state[3] , state[4]);
+				Lista.add(ativ);
+			}
+			
+		} catch (Exception e) {
+			
+		}finally {
+			try {
+				buffRead.close();
+			} catch (Exception e2) {
+				System.out.println("ERRO FECHAR ARQUIVO");
+			}
 		}
 		
-		buffRead.close();
+		
+		
 		
 		
 	}
