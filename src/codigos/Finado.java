@@ -1,12 +1,11 @@
 package codigos;
 
 public class Finado extends Dados {
+	public int ID;
 	String DataSepultamento;
-	
-
 	public Contato Parente;
 	
-	public Finado(String nome, String sobrenome,
+	public Finado(int ID,String nome, String sobrenome,
 			String CPF, String dataDeNascimento,String Sepultamento,
 			Contato contato) 
 	{
@@ -25,5 +24,13 @@ public class Finado extends Dados {
 
 	public void setDataSepultamento(String dataSepultamento) {
 		this.DataSepultamento = dataSepultamento;
+	}
+	
+	public int getID() {
+		return this.ID;
+	}
+
+	public void setID(int iD) {
+		this.ID = iD;
 	}
 }

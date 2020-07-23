@@ -23,7 +23,7 @@ public class Cronograma {
 		return listaDividida;
 	}
 	
-	public void escreverCronograma(String path) throws IOException {
+	public void escreverCronograma(String path) throws IOException { // encapsulamento da classe
 		try {
 			ManipularCSV.EscreverAtividade(path,this.cronograma);
 			System.out.println("Cronograma Gravado");
@@ -34,7 +34,7 @@ public class Cronograma {
 		}		
 	}
 	
-	public void lerCronograma(String path) {
+	public void lerCronograma(String path) {// encapulamento da classe 
 		try {
 			ManipularCSV.LeituraAtividade(path, this.cronograma);
 			System.out.println("Cronograma preenchido!!");

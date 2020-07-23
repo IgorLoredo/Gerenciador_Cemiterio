@@ -1,6 +1,7 @@
 package codigos;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,17 +10,55 @@ import java.util.ArrayList;
 public class ManipularCSV {	
 	
 	public ManipularCSV() {
+		String csvSqlite = ";";
+		String line = "";
+		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 		
+		try {	
+			while((line = buffRead.readLine()) != null) {
+				// leitura das atividades
+				String [] state = line.split(csvSqlite);
+				Atividade ativ = new Atividade(state[0], state[1], state[2],state[3] , state[4]);
+				Lista.add(ativ);
+			}
+			
+		} catch (Exception e) {
+			
+		}finally {
+			try {
+				buffRead.close();
+			} catch (Exception e2) {
+				System.out.println("ERRO FECHAR ARQUIVO");
+			}
+		}	
 	}
 
-	public static void LeRContato(String nomeArquivo, ArrayList <Contato> lista) {
-		FileWriter fileWriter = null;
+	public static void LeRContato(String path, ArrayList <Finado> lista) throws FileNotFoundException {
+		String csvSqlite = ";";
+		String line = "";
+		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 		try {
-			
+			while((line = buffRead.readLine())!=null) {
+				
+				String [] stateStrings = line.split(csvSqlite);
+				Contato contato = new Contato(stateStrings[5], stateStrings[6], stateStrings[7],
+													stateStrings[8], stateStrings[9], stateStrings[10]);
+				int conventendo = Integer.parseInt(stateStrings[0]);
+				Finado finado = new Finado(conventendo, stateStrings[1], stateStrings[2], 
+														stateStrings[3], stateStrings[4], stateStrings[5], contato);
+				
+				lista.add(finado);
+			}
 			
 		} catch (Exception e) {
 			System.out.println("ERRO LEITURA");
 			e.printStackTrace();
+		}finally {
+			try {
+				buffRead.close();
+			} catch (Exception e2) {
+				System.out.println("ERRO FECHAR ARQUIVO!!");
+			}
 		}
 		
 	}	
@@ -32,7 +71,9 @@ public class ManipularCSV {
 			int tam = lista.size();
 			for(int i =0; i < tam; i++) {
 				// adiciona o finado
-				fileWriter.append(lista.get(i).getCPF());
+				fileWriter.append(String.valueOf( lista.get(i).getID()));
+				fileWriter.append(";");	
+				fileWriter.append(lista.get(i).getCPF()); // 0
 				fileWriter.append(";");	
 				fileWriter.append(lista.get(i).getNome());
 				fileWriter.append(";");	
@@ -43,7 +84,7 @@ public class ManipularCSV {
 				fileWriter.append(lista.get(i).getDataSepultamento());
 				fileWriter.append(";");				
 				// adiciona o parente responsavel do finado
-				fileWriter.append(lista.get(i).Parente.getNome());
+				fileWriter.append(lista.get(i).Parente.getNome()); // 5
 				fileWriter.append(";");		
 				fileWriter.append(lista.get(i).Parente.getSobrenome());
 				fileWriter.append(";");		
@@ -53,9 +94,8 @@ public class ManipularCSV {
 				fileWriter.append(";");		
 				fileWriter.append(lista.get(i).Parente.getTelefone());
 				fileWriter.append(";");		
-				fileWriter.append(lista.get(i).Parente.getGrauParentesco());
-				fileWriter.append("\n");		
-				
+				fileWriter.append(lista.get(i).Parente.getGrauParentesco()); // 10
+				fileWriter.append("\n");					
 			}
 			 
 		} catch (Exception e) {
@@ -116,7 +156,6 @@ public class ManipularCSV {
 	public static void LeituraAtividade(String path, ArrayList<Atividade> Lista) throws IOException {
 		String csvSqlite = ";";
 		String line = "";
-		FileWriter fileWriter = null;		
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 		
 		try {	

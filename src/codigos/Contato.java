@@ -11,8 +11,7 @@ public class Contato extends Dados {
 
 	public Contato(String nome, String sobrenome,
 			String CPF, String dataDeNascimento,
-			String telefone, String grauParentesco, String estado,
-			String cidade, String rua, String num) 
+			String telefone, String grauParentesco) 
 	{
 		super(nome, sobrenome, CPF, dataDeNascimento);
 		this.telefone = telefone;
