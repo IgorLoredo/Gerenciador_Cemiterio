@@ -12,7 +12,7 @@ public class ManipularCSV {
 		
 	}
 
-	public static <E> void leCSV(String nomeArquivo, ArrayList <Cova> lista) {
+	public static <E> void leCSV(String nomeArquivo, ArrayList <e> lista) {
 		try {
 			
 			
@@ -23,7 +23,7 @@ public class ManipularCSV {
 		
 	}
 	
-	public static <E> void escreveCSV(String path, ArrayList <Cova> lista) {
+	public static <E> void escreveCSV(String path, ArrayList <e> lista) {
 		FileWriter fileWriter = null;
 		try {			
 			 fileWriter = new FileWriter(path);
@@ -116,13 +116,7 @@ public class ManipularCSV {
 		}		
 		
 	}
+
 	
-	public static void EscritaFuncionariosCSV(String pathFun, ArrayList<Funcionario> ListaFuncionarios ) {
-			FileReader fileRead = null;
-			try {
-				 fileWriter = new FileWriter(pathFun);
-			}
-			
-		}
 		
 }
