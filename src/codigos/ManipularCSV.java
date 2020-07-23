@@ -131,14 +131,14 @@ public class ManipularCSV {
 	
 	public static void LeituraAtividade(String path, ArrayList<Atividade> Lista) throws IOException {
 		String csvSqlite = ";";
-		String line = "";
+		String line = " ";
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
-		
 		try {	
 			while((line = buffRead.readLine()) != null) {
 				// leitura das atividades
 				String [] state = line.split(csvSqlite);
 				Atividade ativ = new Atividade(state[0], state[1], state[2],state[3] , state[4]);
+				System.out.println(state[1]);
 				Lista.add(ativ);
 			}
 			System.out.println("Leitura terminada");
