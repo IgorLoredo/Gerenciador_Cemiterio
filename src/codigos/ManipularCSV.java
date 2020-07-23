@@ -8,32 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ManipularCSV {	
-	
-	public ManipularCSV() {
-		String csvSqlite = ";";
-		String line = "";
-		BufferedReader buffRead = new BufferedReader(new FileReader(path));
-		
-		try {	
-			while((line = buffRead.readLine()) != null) {
-				// leitura das atividades
-				String [] state = line.split(csvSqlite);
-				Atividade ativ = new Atividade(state[0], state[1], state[2],state[3] , state[4]);
-				Lista.add(ativ);
-			}
-			
-		} catch (Exception e) {
-			
-		}finally {
-			try {
-				buffRead.close();
-			} catch (Exception e2) {
-				System.out.println("ERRO FECHAR ARQUIVO");
-			}
-		}	
-	}
 
-	public static void LeRContato(String path, ArrayList <Finado> lista) throws FileNotFoundException {
+	public static void LerContato(String path, ArrayList <Finado> lista) throws FileNotFoundException {
 		String csvSqlite = ";";
 		String line = "";
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
@@ -165,7 +141,7 @@ public class ManipularCSV {
 				Atividade ativ = new Atividade(state[0], state[1], state[2],state[3] , state[4]);
 				Lista.add(ativ);
 			}
-			
+			System.out.println("Leitura terminada");
 		} catch (Exception e) {
 			
 		}finally {
