@@ -1,16 +1,29 @@
 package codigos;
 
 public class Finado extends Dados {
-	public Contato contato;
+	String DataSepultamento;
+	
+
+	public Contato Parente;
 	
 	public Finado(String nome, String sobrenome,
-			String CPF, String dataDeNascimento,
+			String CPF, String dataDeNascimento,String Sepultamento,
 			Contato contato) 
 	{
 		super(nome, sobrenome, CPF, dataDeNascimento);
-		this.contato = contato;
+		this.Parente = contato;
+		this.DataSepultamento = Sepultamento;
 	}
 	
+	public Finado() {
+		
+	}
 	
+	public String getDataSepultamento() {
+		return this.DataSepultamento;
+	}
 
+	public void setDataSepultamento(String dataSepultamento) {
+		this.DataSepultamento = dataSepultamento;
+	}
 }

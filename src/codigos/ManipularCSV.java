@@ -12,7 +12,8 @@ public class ManipularCSV {
 		
 	}
 
-	public static <E> void leCSV(String nomeArquivo, ArrayList <e> lista) {
+	public static void LeRContato(String nomeArquivo, ArrayList <Contato> lista) {
+		FileWriter fileWriter = null;
 		try {
 			
 			
@@ -21,20 +22,41 @@ public class ManipularCSV {
 			e.printStackTrace();
 		}
 		
-	}
-	
-	public static <E> void escreveCSV(String path, ArrayList <e> lista) {
+	}	
+	public static void EscreverContato (String path, ArrayList <Finado> lista) {
 		FileWriter fileWriter = null;
 		try {			
+			//nome, sobrenome, cpf, data de nascimento, telefone grau de paranteco
 			 fileWriter = new FileWriter(path);
-			 fileWriter.append("ID,nome, sobrenome,CPF,dataDeNascimento,telefone,Endereco,Lote,posX,posY\n");
-			 
-			 // escrendo
-			 for(int i = 0; i < lista.size(); i++) {
-				 System.out.println("igor");
-			 }
-			 
-			 
+//			 fileWriter.append("ID,nome, sobrenome,CPF,dataDeNascimento,telefone,Endereco,Lote,posX,posY\n");
+			int tam = lista.size();
+			for(int i =0; i < tam; i++) {
+				// adiciona o finado
+				fileWriter.append(lista.get(i).getCPF());
+				fileWriter.append(";");	
+				fileWriter.append(lista.get(i).getNome());
+				fileWriter.append(";");	
+				fileWriter.append(lista.get(i).getSobrenome());
+				fileWriter.append(";");	
+				fileWriter.append(lista.get(i).getDataDeNascimento());
+				fileWriter.append(";");	
+				fileWriter.append(lista.get(i).getDataSepultamento());
+				fileWriter.append(";");				
+				// adiciona o parente responsavel do finado
+				fileWriter.append(lista.get(i).Parente.getNome());
+				fileWriter.append(";");		
+				fileWriter.append(lista.get(i).Parente.getSobrenome());
+				fileWriter.append(";");		
+				fileWriter.append(lista.get(i).Parente.getCPF());
+				fileWriter.append(";");		
+				fileWriter.append(lista.get(i).Parente.getDataDeNascimento());
+				fileWriter.append(";");		
+				fileWriter.append(lista.get(i).Parente.getTelefone());
+				fileWriter.append(";");		
+				fileWriter.append(lista.get(i).Parente.getGrauParentesco());
+				fileWriter.append("\n");		
+				
+			}
 			 
 		} catch (Exception e) {
 			System.out.println("ERRO ESCRITA!!");
@@ -113,7 +135,7 @@ public class ManipularCSV {
 			} catch (Exception e2) {
 				System.out.println("ERRO FECHAR ARQUIVO");
 			}
-		}		
+		}	
 		
 	}
 

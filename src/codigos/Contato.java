@@ -3,8 +3,12 @@ package codigos;
 public class Contato extends Dados {
 	String telefone;
 	String grauParentesco;
-	Endereco endereco;
 	
+	public Contato() {
+		this.telefone = null;
+		this.grauParentesco = null;
+	}
+
 	public Contato(String nome, String sobrenome,
 			String CPF, String dataDeNascimento,
 			String telefone, String grauParentesco, String estado,
@@ -13,8 +17,23 @@ public class Contato extends Dados {
 		super(nome, sobrenome, CPF, dataDeNascimento);
 		this.telefone = telefone;
 		this.grauParentesco = grauParentesco;
-		endereco = new Endereco(estado, cidade, rua, num);
 		
+	}
+	
+	public String getTelefone() {
+		return this.telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getGrauParentesco() {
+		return this.grauParentesco;
+	}
+
+	public void setGrauParentesco(String grauParentesco) {
+		this.grauParentesco = grauParentesco;
 	}
 
 }
