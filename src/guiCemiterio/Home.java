@@ -35,7 +35,83 @@ public class Home extends JFrame {
 	private JButton btnRegistrarFinado;
 	private JButton btnEditarRegistro;
 	private JButton btnSalvarESair;
+	
+	private void eventsHandler() {
+		btnBuscarFinado.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Busca frame = new Busca();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+		
+		btnConsultarConograma.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Cronograma frame = new Cronograma();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 
+		btnRegistrarFinado.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Incluir frame = new Incluir();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+
+		btnSalvarESair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO lembrar de salvar os arquivos em seus respectivos CSV
+				Home.this.dispose();
+			}
+		});
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * ######################## CODIGO ABAIXO GERADO PELA IDE ECLIPSE #############################
+	 */
+	
 	/**
 	 * Launch the application.
 	 */
@@ -99,63 +175,5 @@ public class Home extends JFrame {
 		
 		btnSalvarESair.setBounds(339, 365, 147, 25);
 		contentPane.add(btnSalvarESair);
-	}
-	
-	private void eventsHandler() {
-		btnBuscarFinado.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							Busca frame = new Busca();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		
-		btnConsultarConograma.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							Cronograma frame = new Cronograma();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-
-		btnRegistrarFinado.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							Incluir frame = new Incluir();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-
-		btnSalvarESair.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO lembrar de salvar os arquivos em seus respectivos CSV
-				Home.this.dispose();
-			}
-		});
 	}
 }

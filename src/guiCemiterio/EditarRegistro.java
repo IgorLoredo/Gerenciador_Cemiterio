@@ -44,6 +44,54 @@ public class EditarRegistro extends JFrame {
 	private JLabel lblCaminhoFoto;
 	private JLabel lblIconFoto;
 
+	private void eventsHandler() {
+		btnCarregar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Busca registro, se encontrar carrega informacao, se nao aparece mensagem
+				lblNaoEncontrou.setText("Nenhum registro encontrado");
+				registroValido = false;
+			}
+		});
+		
+		btnSalvarESair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO lembrar de salvar as mudancas
+				if(registroValido) {
+					// TODO fazer alteracao no registro
+				} else {
+					// TODO fazer um painel dizendo que nenhuma alteracao foi feita
+				}
+				EditarRegistro.this.dispose();
+			}
+		});
+	
+		btnVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EditarRegistro.this.dispose();
+			}
+		});
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * ######################## CODIGO ABAIXO GERADO PELA IDE ECLIPSE #############################
+	 */
+	
 	/**
 	 * Launch the application.
 	 */
@@ -247,34 +295,4 @@ public class EditarRegistro extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 
-	private void eventsHandler() {
-		btnCarregar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// Busca registro, se encontrar carrega informacao, se nao aparece mensagem
-				lblNaoEncontrou.setText("Nenhum registro encontrado");
-				registroValido = false;
-			}
-		});
-		
-		btnSalvarESair.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO lembrar de salvar as mudancas
-				if(registroValido) {
-					// TODO fazer alteracao no registro
-				} else {
-					// TODO fazer um painel dizendo que nenhuma alteracao foi feita
-				}
-				EditarRegistro.this.dispose();
-			}
-		});
-	
-		btnVoltar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				EditarRegistro.this.dispose();
-			}
-		});
-	}
 }

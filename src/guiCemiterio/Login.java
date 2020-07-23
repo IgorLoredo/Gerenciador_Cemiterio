@@ -30,6 +30,62 @@ public class Login extends JFrame {
 	private JTextField textUsuario;
 	private JButton btnEntrar;
 
+	
+	private void eventsHandler() {
+		// Limpa o texto escrito em Usuario
+		textUsuario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				textUsuario.setText("");
+			}
+		});
+		
+		// Limpa o texto escrito no campo de senha
+		passwordField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				passwordField.setText("");
+			}
+		});
+		
+		btnEntrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String usuario = "admin";
+				char[] senha = {'1', '2', '3'};
+				
+				if(textUsuario.getText().equals(usuario) 
+						&& Arrays.equals(senha, passwordField.getPassword())) {
+					frame.setVisible(false);
+					frame.dispose();
+					new Home().setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null,
+			                "Usuario e/ou senha incorretos");
+				}
+				
+			}
+		});
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * ######################## CODIGO ABAIXO GERADO PELA IDE ECLIPSE #############################
+	 */
+	
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +108,7 @@ public class Login extends JFrame {
 	public Login() {
 		setTitle("Gerenciador de Cemiterio - Login");
 		initComponents();
-		handleEvents();
+		eventsHandler();
 	}
 	
 	private void initComponents() {
@@ -116,40 +172,4 @@ public class Login extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 	
-	private void handleEvents() {
-		// Limpa o texto escrito em Usuario
-		textUsuario.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				textUsuario.setText("");
-			}
-		});
-		
-		// Limpa o texto escrito no campo de senha
-		passwordField.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				passwordField.setText("");
-			}
-		});
-		
-		btnEntrar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				String usuario = "admin";
-				char[] senha = {'1', '2', '3'};
-				
-				if(textUsuario.getText().equals(usuario) 
-						&& Arrays.equals(senha, passwordField.getPassword())) {
-					frame.setVisible(false);
-					frame.dispose();
-					new Home().setVisible(true);
-				} else {
-					JOptionPane.showMessageDialog(null,
-			                "Usuario e/ou senha incorretos");
-				}
-				
-			}
-		});
-	}
 }
