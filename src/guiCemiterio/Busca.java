@@ -1,5 +1,5 @@
 package guiCemiterio;
-//teste
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -34,6 +34,39 @@ public class Busca extends JFrame {
 	private JButton btnAplicar;
 	private JButton btnVoltar;
 
+	private void handleEvents() {
+		txtrDigiteAqui.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!verificaTexto) {
+					txtrDigiteAqui.setText("");
+					verificaTexto = true;
+				}
+			}
+		});
+		
+		btnAplicar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
+		btnVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Busca.this.dispose();
+			}
+		});
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * ######################## CODIGO ABAIXO GERADO PELA IDE ECLIPSE #############################
+	 */
+	
 	/**
 	 * Launch the application.
 	 */
@@ -149,29 +182,5 @@ public class Busca extends JFrame {
 		});
 		scrollPane.setViewportView(list);
 		contentPane.setLayout(gl_contentPane);
-	}
-	
-	private void handleEvents() {
-		txtrDigiteAqui.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(!verificaTexto) {
-					txtrDigiteAqui.setText("");
-					verificaTexto = true;
-				}
-			}
-		});
-		
-		btnAplicar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		
-		btnVoltar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Busca.this.dispose();
-			}
-		});
 	}
 }

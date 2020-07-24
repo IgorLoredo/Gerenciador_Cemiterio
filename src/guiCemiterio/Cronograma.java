@@ -35,6 +35,31 @@ public class Cronograma extends JFrame {
 	private JButton btnVoltar;
 	private JButton btnAplicar;
 
+	private void eventsHandler() {
+		btnVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Cronograma.this.dispose();
+			}
+		});
+		
+		btnAplicar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+	}	
+	
+	
+	
+	
+	
+	
+	/**
+	 * ######################## CODIGO ABAIXO GERADO PELA IDE ECLIPSE #############################
+	 */
+	
 	/**
 	 * Launch the application.
 	 */
@@ -139,22 +164,6 @@ public class Cronograma extends JFrame {
 		
 		scrollLista.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
-	}
-
-	private void eventsHandler() {
-		btnVoltar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Cronograma.this.dispose();
-			}
-		});
-		
-		btnAplicar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-			}
-		});
 	}
 
 }

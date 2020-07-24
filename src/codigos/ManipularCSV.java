@@ -1,10 +1,13 @@
 package codigos;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class ManipularCSV {	
@@ -100,8 +103,7 @@ public class ManipularCSV {
 			 // escrendo titulo, data, horario, horario, tipo, descrição
 			 int tam =  Lista.size();
 			 for(int i = 0; i < tam; i++) {
-				fileWriter.append(Lista.get(i).getTitulo());
-				System.out.println( Lista.get(i).getTitulo());
+				fileWriter.append(Lista.get(i).getTitulo());				
 				fileWriter.append(";");	
 				fileWriter.append(Lista.get(i).getDescricao());
 				fileWriter.append(";");	
@@ -130,20 +132,22 @@ public class ManipularCSV {
 	}
 	
 	public static void LeituraAtividade(String path, ArrayList<Atividade> Lista) throws IOException {
-		String csvSqlite = ";";
+		String csvSqlite = ",";
 		String line = " ";
-		BufferedReader buffRead = new BufferedReader(new FileReader(path));
-		try {	
-			while((line = buffRead.readLine()) != null) {
+//		FileReader read = new FileReader(path);
+		BufferedReader buffRead = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-16"));
+
+		 try{	
+			while((line = buffRead.readLine())  != null) {
 				// leitura das atividades
 				String [] state = line.split(csvSqlite);
 				Atividade ativ = new Atividade(state[0], state[1], state[2],state[3] , state[4]);
-				System.out.println(state[1]);
 				Lista.add(ativ);
 			}
 			System.out.println("Leitura terminada");
 		} catch (Exception e) {
-			
+			System.out.println("ERRO AO LER ARQUIVO DE ATIVIDADES");
+			e.getLocalizedMessage();
 		}finally {
 			try {
 				buffRead.close();
