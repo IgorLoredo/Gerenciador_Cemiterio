@@ -122,7 +122,7 @@ public class Incluir extends JFrame {
 				if(!VerificacaoDeInputs.verificaData(txtDataNascimento.getText()))
 					msgErro += "Data de Nascimento Invalida\n";
 				if(!VerificacaoDeInputs.verificaData(textDataFalecimento.getText()))
-					msgErro += "Data de Falescimento Invalida\n";
+					msgErro += "Data de Falecimento Invalida\n";
 				if(!VerificacaoDeInputs.verificaDocumento(txtDigiteODocumento.getText()))
 					msgErro += "Documento Invalido\n";
 				
@@ -138,6 +138,7 @@ public class Incluir extends JFrame {
 					msgErro += "Email Invalido\n";
 				if(!VerificacaoDeInputs.verificaTelefone(textTelefone.getText()))
 					msgErro += "Telefone Invalido\n";
+				// TODO funcao pra descricao
 				
 				if(msgErro.equals("")) {
 					// Cria Finado, gera ID
