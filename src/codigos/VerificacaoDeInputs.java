@@ -1,5 +1,6 @@
 package codigos;
 
+import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class VerificacaoDeInputs {
@@ -14,20 +15,34 @@ public class VerificacaoDeInputs {
 	 */
 	public static boolean verificaNome(String s) {
 		// Verifica se existe algum caracter nao alfabetico no nome
+		boolean stringValida = false;
 		
-		return false;
+		
+		return stringValida;
 	}
 	
 	//Utiliza expressões regulares para verificar se um documento eh valido
 	public static boolean verificaDocumento(String s) {
+		boolean stringValida = false;
 		// Verifica se existe algum caracter nao numerico no documento
 		
-		return false;
+		
+		return stringValida;
+	}
+	
+	//Utiliza expressões regulares para verificar se uma data eh valida
+	public static boolean verificaData(String s) {
+		boolean stringValida = false;
+		// Verifica se existe algum caracter nao numerico no documento
+		
+		
+		return stringValida;
 	}
 	
 	
 	// Utiliza expressões regulares para verificar se um email eh valido
 	public static boolean verificaEmail(String s) {
+		boolean stringValida = false;
 		String sep = "@";
 		
 		Pattern separador = Pattern.compile(sep);
@@ -43,7 +58,14 @@ public class VerificacaoDeInputs {
 		 *  alfabeticos minusculos
 		 */
 		
+		return stringValida;
+	}
+	
+	public static boolean verificaTelefone(String s) {
+		boolean stringValida = false;
+		// Verifica se existe algum caracter nao numerico no telefone
 		
-		return (!primeiraParte);
+		
+		return stringValida;
 	}
 }
