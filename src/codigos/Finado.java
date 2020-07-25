@@ -17,6 +17,10 @@ public class Finado extends Dados {
 		setID(ID);
 	}
 	
+	public Finado() {
+		// TODO Auto-generated constructor stubW
+	}
+
 	public String getDataSepultamento() {
 		return this.dataSepultamento;
 	}

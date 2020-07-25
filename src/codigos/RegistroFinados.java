@@ -62,7 +62,7 @@ public class RegistroFinados {
 			Collections.sort(lista, new Comparator<Finado>() {
 				@Override
 				public int compare(Finado fin1, Finado fin2) {	
-					return fin1.getDataDeNascimento().compareTo(fin1.getDataDeNascimento());
+					return fin1.getDataDeNascimento().compareTo(fin2.getDataDeNascimento());
 				}
 			});
 			
