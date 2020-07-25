@@ -13,6 +13,7 @@ public class Cronograma {
 	
 	public void addEvento(Atividade a) {
 		this.cronograma.add(a);
+		
 	}
 		
 	public ArrayList<Atividade> pesquisaData(//Data 1 e Data 2

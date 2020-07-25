@@ -21,13 +21,13 @@ public class RegistroFinados {
 	}
 	
 	public int getNumRegistros() {
-		return numRegistrados;
+		return this.numRegistrados;
 	}
 	
 	public boolean incluirRegistro(Finado reg) {
 		if(lista.add(reg)) {
 			numRegistrados++;
-			//lista.sort();
+			//RegistroFinados.ordenaLista(this.lista, "ID");
 			return true;
 		}
 		return false;
@@ -46,6 +46,7 @@ public class RegistroFinados {
 				}
 			});
 			break;
+			
 		case "NOME": 
 			Collections.sort(lista, new Comparator<Finado>() {
 		        @Override
@@ -54,19 +55,18 @@ public class RegistroFinados {
 
 		            return  (fin1.getNome()+" "+fin1.getSobrenome()).compareTo(fin2.getNome()+" "+fin2.getSobrenome());
 		        }
-		    });
-			
-			
+		    });			
 			break;
+			
 		case "DATANASC":
 			Collections.sort(lista, new Comparator<Finado>() {
 				@Override
 				public int compare(Finado fin1, Finado fin2) {	
 					return fin1.getDataDeNascimento().compareTo(fin2.getDataDeNascimento());
 				}
-			});
-			
+			});			
 			break;
+			
 		case "DATAFALESC": 
 			Collections.sort(lista,new Comparator<Finado>() {
 

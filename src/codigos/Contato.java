@@ -22,6 +22,14 @@ public class Contato extends Dados {
 		
 	}
 	
+	public String toString() {
+		 String nome = "nome: " + this.nome + " "+ this.sobrenome + "\nCPF: "+
+				this.CPF + "\nnome do Familiar: " + "\nData de Nascimento: " 
+				+ this.dataDeNascimento + "\ntelefone: "+ this.telefone +"\nEmail: "
+					+ this.email +"\nGrau Parentesco: "+  this.grauParentesco;	
+		 return nome;
+	}
+	
 	public String getTelefone() {
 		return this.telefone;
 	}
