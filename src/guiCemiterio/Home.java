@@ -16,6 +16,9 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import codigos.RegistroFinados;
+
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -35,6 +38,19 @@ public class Home extends JFrame {
 	private JButton btnRegistrarFinado;
 	private JButton btnEditarRegistro;
 	private JButton btnSalvarESair;
+	private RegistroFinados registro;
+	
+	public Home() {
+		registro = new RegistroFinados();
+		initComponents();
+		eventsHandler();
+	}
+	
+	public Home(RegistroFinados registro) {
+		this.registro = registro;
+		initComponents();
+		eventsHandler();
+	}
 	
 	private void eventsHandler() {
 		btnBuscarFinado.addMouseListener(new MouseAdapter() {
@@ -43,7 +59,7 @@ public class Home extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Busca frame = new Busca();
+							Busca frame = new Busca(registro);
 							frame.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -75,7 +91,7 @@ public class Home extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Incluir frame = new Incluir();
+							Incluir frame = new Incluir(registro);
 							frame.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -128,13 +144,7 @@ public class Home extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public Home() {
-		initComponents();
-		eventsHandler();
-	}
+
 	
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

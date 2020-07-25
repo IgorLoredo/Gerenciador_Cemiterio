@@ -188,8 +188,8 @@ public class Incluir extends JFrame {
 								txtEmailContato.getText()));		
 				
 				// Verifica se a inclusao foi feita corretamente
-				if(registro.incluirRegistro(fin)) {
-					if(imagemValida) {
+				if(imagemValida) {
+					if(registro.incluirRegistro(fin)) {
 						try {
 							copiaImagem(caminhoImagemFinado, String.valueOf(fin.getID()));
 						} catch (IOException e1) {

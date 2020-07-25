@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import codigos.Finado;
 import codigos.RegistroFinados;
 
 import javax.swing.GroupLayout;
@@ -184,10 +185,17 @@ public class Busca extends JFrame {
 		scrollPane_1.setViewportView(table);
 		tableModel.addColumn("ID");
 		tableModel.addColumn("Nome");
-		tableModel.addColumn("Sobrenome");
 		tableModel.addColumn("Data de Nasc.");
 		tableModel.addColumn("Data Falesc.");
-		tableModel.addColumn("Responsavel");
+		for(Finado finado : registro.lista) {
+			tableModel.addRow(new String[] {
+				String.valueOf(finado.getID()),
+				finado.getNome()+" "+finado.getSobrenome(),
+				finado.getDataDeNascimento(),
+				finado.getDataSepultamento(),
+			});
+		}
+		
 		
 		list = new JList<String[]>();
 		list.setModel(new AbstractListModel() {
