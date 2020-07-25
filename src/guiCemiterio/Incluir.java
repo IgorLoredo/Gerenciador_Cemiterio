@@ -116,17 +116,8 @@ public class Incluir extends JFrame {
 					imagemValida = true;
 					lblFotocaminho.setText(caminhoImagemFinado);
 					
-					try {
-						Files.copy(Paths.get(selectedFile.getAbsolutePath()), 
-								Paths.get(System.getProperty("user.dir")+"/fotos/a.jpg"),
-								REPLACE_EXISTING);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
-					lblIcone.setText("");
 					// Poe a imagem na tela
+					lblIcone.setText("");
 					lblIcone.setIcon(new ImageIcon(selectedFile.getAbsolutePath()));
 				} else lblIcone.setText("Foto Invalida");
 			}
