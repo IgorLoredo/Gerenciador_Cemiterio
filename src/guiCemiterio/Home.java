@@ -164,6 +164,21 @@ public class Home extends JFrame {
 		contentPane.add(btnRegistrarFinado);
 		
 		btnEditarRegistro = new JButton("Editar Registro");
+		btnEditarRegistro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							EditarRegistro frame = new EditarRegistro();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		btnEditarRegistro.setBounds(268, 162, 198, 25);
 		contentPane.add(btnEditarRegistro);
 		
