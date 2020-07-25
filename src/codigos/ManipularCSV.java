@@ -20,11 +20,11 @@ public class ManipularCSV {
 			while((line = buffRead.readLine())!=null) {
 				
 				String [] stateStrings = line.split(csvSqlite);
-				Contato contato = new Contato(stateStrings[5], stateStrings[6], stateStrings[7],
-													stateStrings[8], stateStrings[9], stateStrings[10]);
+				Contato contato = new Contato(stateStrings[7], stateStrings[8], stateStrings[9],
+													stateStrings[10], stateStrings[11], stateStrings[12], stateStrings[13]);
 				int conventendo = Integer.parseInt(stateStrings[0]);
 				Finado finado = new Finado(conventendo, stateStrings[1], stateStrings[2], 
-														stateStrings[3], stateStrings[4], stateStrings[5], contato);
+														stateStrings[3], stateStrings[4], stateStrings[5],stateStrings[6], contato);
 				
 				lista.add(finado);
 			}
@@ -62,18 +62,22 @@ public class ManipularCSV {
 				fileWriter.append(";");	
 				fileWriter.append(lista.get(i).getDataSepultamento());
 				fileWriter.append(";");				
+				fileWriter.append(lista.get(i).getDescricao());
+				fileWriter.append(";");	
 				// adiciona o parente responsavel do finado
-				fileWriter.append(lista.get(i).Parente.getNome()); // 5
+				fileWriter.append(lista.get(i).parente.getNome()); // 5
 				fileWriter.append(";");		
-				fileWriter.append(lista.get(i).Parente.getSobrenome());
+				fileWriter.append(lista.get(i).parente.getSobrenome());
 				fileWriter.append(";");		
-				fileWriter.append(lista.get(i).Parente.getCPF());
+				fileWriter.append(lista.get(i).parente.getCPF());
 				fileWriter.append(";");		
-				fileWriter.append(lista.get(i).Parente.getDataDeNascimento());
+				fileWriter.append(lista.get(i).parente.getDataDeNascimento());
 				fileWriter.append(";");		
-				fileWriter.append(lista.get(i).Parente.getTelefone());
+				fileWriter.append(lista.get(i).parente.getTelefone());
 				fileWriter.append(";");		
-				fileWriter.append(lista.get(i).Parente.getGrauParentesco()); // 10
+				fileWriter.append(lista.get(i).parente.getGrauParentesco()); // 10
+				fileWriter.append(";");	
+				fileWriter.append(lista.get(i).parente.getEmail());
 				fileWriter.append("\n");					
 			}
 			 

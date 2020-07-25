@@ -3,7 +3,7 @@ package codigos;
 public class Finado extends Dados {
 	private int ID;
 	private String dataSepultamento;
-	private Contato parente;
+	public Contato parente;
 	private String descricao;
 	
 	public Finado(int ID,String nome, String sobrenome,
@@ -42,7 +42,7 @@ public class Finado extends Dados {
 	}
 
 	public String getDescricao() {
-		return descricao;
+		return this.descricao;
 	}
 
 	public void setDescricao(String descricao) {

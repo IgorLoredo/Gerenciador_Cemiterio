@@ -37,5 +37,13 @@ public class Contato extends Dados {
 	public void setGrauParentesco(String grauParentesco) {
 		this.grauParentesco = grauParentesco;
 	}
+	
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 }
