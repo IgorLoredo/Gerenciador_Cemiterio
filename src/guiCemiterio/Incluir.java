@@ -1,5 +1,6 @@
 package guiCemiterio;
 
+import codigos.*;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -23,7 +24,12 @@ import javax.swing.filechooser.FileSystemView;
 import codigos.VerificacaoDeInputs;
 
 import java.util.regex.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -46,6 +52,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 public class Incluir extends JFrame {
+	// Variaveis geradas pela IDE Eclipse
 	private JTextField textNome;
 	private JTextField textSobrenome;
 	private JTextField txtDigiteODocumento;
@@ -68,38 +75,59 @@ public class Incluir extends JFrame {
 	private JLabel lblImagem;
 	private JPanel panel_1;
 	private JLabel lblIcone;
-
+	private JTextField txtContatoDataNascimento;
+	
+	// Variaveis
+	RegistroFinados registro;
+	String caminhoImagemFinado = null;
+	boolean imagemValida = false;
+	
+	public Incluir(RegistroFinados registro) {
+		this.registro = registro;
+		initComponents();
+		eventsHandler();
+	}
+	
+	public Incluir() {
+		initComponents();
+		eventsHandler();
+	}
+	
 	private void eventsHandler() {
 		btnProcurar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				// Abre o gerenciador de arquivo, inicialmente na pasta de fotos pre-selecionadas
 				JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory()
 						+ "/Downloads");
 				jfc.setDialogTitle("Selecione uma imagem");
 				jfc.setAcceptAllFileFilterUsed(false);
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG, GIF, JPEG", "png", "gif", "jpg");
+				// Filtra as extensoes de arquivos suportadas, nesse caso,, unicamente JPEG
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPEG", "jpg");
 				jfc.addChoosableFileFilter(filter);
-				
+		
 				int returnValue = jfc.showOpenDialog(null);
 				
+				// Verifica se algum arquivo foi selecionado
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = jfc.getSelectedFile();
-					lblFotocaminho.setText(Incluir.class.getResource("/recursos/fotos/").toString());
+					// Armazena o PATH da imagem selecionada
+					caminhoImagemFinado = selectedFile.getAbsolutePath();
+					imagemValida = true;
+					lblFotocaminho.setText(caminhoImagemFinado);
+					
 					try {
 						Files.copy(Paths.get(selectedFile.getAbsolutePath()), 
-								Paths.get(Incluir.class.getResource("/recursos/fotos").toURI()),
+								Paths.get(System.getProperty("user.dir")+"/fotos/a.jpg"),
 								REPLACE_EXISTING);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					} catch (URISyntaxException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					}
 
-					lblIcone.setText(Incluir.class.getResource("/recursos/fotos/").toString());
-					lblIcone.setIcon(new ImageIcon(Incluir.class.getResource("/recursos/fotos/a.jpeg")));
-					//lblIcone.setIcon(new ImageIcon(selectedFile.getAbsolutePath()));
+					lblIcone.setText("");
+					// Poe a imagem na tela
+					lblIcone.setIcon(new ImageIcon(selectedFile.getAbsolutePath()));
 				} else lblIcone.setText("Foto Invalida");
 			}
 		});
@@ -107,6 +135,7 @@ public class Incluir extends JFrame {
 		btnVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				// Volta a tela Home
 				Incluir.this.dispose();
 			}
 		});
@@ -114,7 +143,7 @@ public class Incluir extends JFrame {
 		btnSalvarESair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String msgErro="";
+				/*String msgErro="";
 				if(!VerificacaoDeInputs.verificaNome(textNome.getText()))
 					msgErro += "Nome Invalido\n";
 				if(!VerificacaoDeInputs.verificaNome(textSobrenome.getText()))
@@ -138,7 +167,9 @@ public class Incluir extends JFrame {
 					msgErro += "Email Invalido\n";
 				if(!VerificacaoDeInputs.verificaTelefone(textTelefone.getText()))
 					msgErro += "Telefone Invalido\n";
-				// TODO funcao pra descricao
+				if(!imagemValida)
+					msgErro += "Imagem Invalida\n";
+				
 				
 				if(msgErro.equals("")) {
 					// Cria Finado, gera ID
@@ -151,30 +182,42 @@ public class Incluir extends JFrame {
 			                "Verifique estes campos:\n"+msgErro);
 				}
 				
+			*/
+				
+				// Apos verificar se o conteudo dos campos de texto sao validos
+				// criamos um cadastro e adicionamos no registro geral 
+				Finado fin = new Finado(registro.getNumRegistros()+1000,
+						textNome.getText(), textSobrenome.getText(),
+						txtDigiteODocumento.getText(), txtDataNascimento.getText(),
+						textDataFalecimento.getText(), txtDescricao.getText(),
+						new Contato(textContatoNome.getText(),
+								textContatoSobrenome.getText(), textContatoDocumento.getText(),
+								txtContatoDataNascimento.getText(),textTelefone.getText(),
+								textContatoGraudeParentesco.getText(),
+								txtEmailContato.getText()));		
+				
+				// Verifica se a inclusao foi feita corretamente
+				if(registro.incluirRegistro(fin)) {
+					if(imagemValida) {
+						try {
+							copiaImagem(caminhoImagemFinado, String.valueOf(fin.getID()));
+						} catch (IOException e1) {
+							JOptionPane.showMessageDialog(null, "Erro ao copiar imagem para o banco");
+						}
+						JOptionPane.showMessageDialog(null, "Registro incluido com sucesso");
+						Incluir.this.dispose();
+					}
+				} else JOptionPane.showMessageDialog(null, "Erro ao incluir registro");
 			}
+			
 		});
 	}
 	
-	private Path copiaImagem(Path caminhoImagem, String idFinado) {
-		Path destino = null;
-		/*try {
-			destino = Paths.get((Incluir.class.getResource("/recursos/fotos")
-					+idFinado+".jpg").toURI());
-		} catch (URISyntaxException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
+	private void copiaImagem(String caminhoImagem, String idFinado) throws IOException {
+		Files.copy(Paths.get(caminhoImagem), 
+				Paths.get(System.getProperty("user.dir")+"/fotos/"+idFinado+".jpg"),
+				REPLACE_EXISTING);
 		
-		try {
-			Files.copy(caminhoImagem, destino, REPLACE_EXISTING);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			return null;
-		} finally {
-			
-		}
-		
-		return destino;
 	}
 	
 	
@@ -200,7 +243,7 @@ public class Incluir extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Incluir frame = new Incluir();
+					Incluir frame = new Incluir(new RegistroFinados());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -212,10 +255,6 @@ public class Incluir extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Incluir() {
-		initComponents();
-		eventsHandler();
-	}
 	
 	private void initComponents() {
 		setTitle("Gerenciador de Cemiterio - Incluir");
@@ -430,6 +469,13 @@ public class Incluir extends JFrame {
 		textContatoGraudeParentesco = new JTextField();
 		textContatoGraudeParentesco.setFont(new Font("Dialog", Font.PLAIN, 14));
 		textContatoGraudeParentesco.setColumns(10);
+		
+		JLabel lblContatoDataDeNascimento = new JLabel("Data de nasc:");
+		
+		txtContatoDataNascimento = new JTextField();
+		txtContatoDataNascimento.setText("dd/mm/aaaa");
+		txtContatoDataNascimento.setFont(new Font("Dialog", Font.PLAIN, 14));
+		txtContatoDataNascimento.setColumns(10);
 		GroupLayout gl_pnlContato = new GroupLayout(pnlContato);
 		gl_pnlContato.setHorizontalGroup(
 			gl_pnlContato.createParallelGroup(Alignment.LEADING)
@@ -437,28 +483,34 @@ public class Incluir extends JFrame {
 					.addContainerGap()
 					.addGroup(gl_pnlContato.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_pnlContato.createSequentialGroup()
-							.addComponent(lblTelefone)
+							.addGroup(gl_pnlContato.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_pnlContato.createSequentialGroup()
+									.addComponent(lblTelefone)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textTelefone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+									.addComponent(lblGrauDeParentesco))
+								.addGroup(gl_pnlContato.createSequentialGroup()
+									.addComponent(lblContatoNome)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textContatoNome, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(lblContatoSobrenome))
+								.addGroup(gl_pnlContato.createSequentialGroup()
+									.addComponent(lblContatoDocumento)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textContatoDocumento, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+									.addComponent(lblEmail)))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textTelefone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-							.addComponent(lblGrauDeParentesco))
+							.addGroup(gl_pnlContato.createParallelGroup(Alignment.LEADING)
+								.addComponent(textContatoSobrenome, GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+								.addComponent(txtEmailContato, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textContatoGraudeParentesco, 282, 282, 282)))
 						.addGroup(gl_pnlContato.createSequentialGroup()
-							.addComponent(lblContatoNome)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textContatoNome, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblContatoSobrenome))
-						.addGroup(gl_pnlContato.createSequentialGroup()
-							.addComponent(lblContatoDocumento)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textContatoDocumento, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-							.addComponent(lblEmail)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_pnlContato.createParallelGroup(Alignment.LEADING)
-						.addComponent(textContatoSobrenome, GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-						.addComponent(txtEmailContato, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textContatoGraudeParentesco))
+							.addComponent(lblContatoDataDeNascimento, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtContatoDataNascimento, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_pnlContato.setVerticalGroup(
@@ -478,21 +530,21 @@ public class Incluir extends JFrame {
 						.addGroup(gl_pnlContato.createParallelGroup(Alignment.BASELINE)
 							.addComponent(txtEmailContato, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lblEmail)))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_pnlContato.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_pnlContato.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_pnlContato.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblGrauDeParentesco)
-								.addComponent(textContatoGraudeParentesco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_pnlContato.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_pnlContato.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblTelefone)
-								.addComponent(textTelefone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(57, Short.MAX_VALUE))
+						.addGroup(gl_pnlContato.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblGrauDeParentesco)
+							.addComponent(textContatoGraudeParentesco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_pnlContato.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblTelefone)
+							.addComponent(textTelefone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_pnlContato.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblContatoDataDeNascimento)
+						.addComponent(txtContatoDataNascimento, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(37, Short.MAX_VALUE))
 		);
 		pnlContato.setLayout(gl_pnlContato);
 		contentPane.setLayout(gl_contentPane);
 	}
-
 }

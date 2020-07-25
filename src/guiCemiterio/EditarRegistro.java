@@ -11,6 +11,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -43,12 +44,26 @@ public class EditarRegistro extends JFrame {
 	private JLabel lblDescricao;
 	private JLabel lblCaminhoFoto;
 	private JButton btnProcurar;
-	private JLabel lblFotoInvalida;
+	private JLabel lblImagem;
 	private JTextArea txtDescricao;
 	private boolean registroValido = false;
 	private JLabel lblRegistroNaoEncontrado;
-	Finado fin;
+	private Finado fin = null;
+	private RegistroFinados registro = null;
+	private boolean imagemValida = false;
 
+	public EditarRegistro() {
+		registro = new RegistroFinados();
+		initComponents();
+		eventsHandler();
+	}
+	
+	public EditarRegistro(RegistroFinados registro) {
+		this.registro = registro;
+		initComponents();
+		eventsHandler();
+	}
+	
 	private void eventsHandler() {
 		btnCarregar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -63,7 +78,10 @@ public class EditarRegistro extends JFrame {
 					txtDataNasc.setText(fin.getDataDeNascimento());
 					txtDataFalec.setText(fin.getDataSepultamento());
 					txtDocumento.setText(fin.getCPF());
-					//txtDescricao.setText(fin.getDescricao());
+					txtDescricao.setText(fin.getDescricao());
+					lblImagem.setText("");
+					lblImagem.setIcon(new ImageIcon(System.getProperty("user.dir")+"/fotos/"+
+					   fin.getID() + ".jpg"));
 				} else {
 					registroValido = false;
 					lblRegistroNaoEncontrado.setText("Nenhum registro encontrado");
@@ -89,7 +107,8 @@ public class EditarRegistro extends JFrame {
 						msgErro += "Data de Falecimento Invalida\n";
 					if(!VerificacaoDeInputs.verificaDocumento(txtDocumento.getText()))
 						msgErro += "Documento Invalido\n";
-					// TODO Verificar se descricao eh valida
+					if(!imagemValida)
+						msgErro += "Imagem Invalida";
 					
 					if(msgErro.equals("")) {
 						fin.setNome(txtNome.getText());
@@ -148,14 +167,6 @@ public class EditarRegistro extends JFrame {
 				}
 			}
 		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public EditarRegistro() {
-		initComponents();
-		eventsHandler();
 	}
 	
 	private void initComponents() {
@@ -259,10 +270,10 @@ public class EditarRegistro extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		lblFotoInvalida = new JLabel("Foto Invalida");
-		lblFotoInvalida.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFotoInvalida.setBounds(0, 0, 256, 256);
-		panel.add(lblFotoInvalida);
+		lblImagem = new JLabel("Foto Invalida");
+		lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
+		lblImagem.setBounds(0, 0, 256, 256);
+		panel.add(lblImagem);
 		contentPane.add(lblDescricao);
 		contentPane.add(txtDescricao);
 		contentPane.add(btnVoltar);

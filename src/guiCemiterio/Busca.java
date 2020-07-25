@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import codigos.RegistroFinados;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -33,7 +36,22 @@ public class Busca extends JFrame {
 	private boolean verificaTexto = false;
 	private JButton btnAplicar;
 	private JButton btnVoltar;
-
+	private JList<String[]> list;
+	RegistroFinados registro;
+	
+	public Busca() {
+		setTitle("Gerenciador de Cemiterio - Busca");
+		initComponents();
+		handleEvents();
+	}
+	
+	public Busca(RegistroFinados registro) {
+		setTitle("Gerenciador de Cemiterio - Busca");
+		this.registro = registro;
+		initComponents();
+		handleEvents();
+	}
+	
 	private void handleEvents() {
 		txtrDigiteAqui.addMouseListener(new MouseAdapter() {
 			@Override
@@ -47,6 +65,16 @@ public class Busca extends JFrame {
 		
 		btnAplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				switch(list.getSelectedIndex()) {
+				case 0: // Busca por ID
+					break;
+				case 1: // Busca por nome
+					break;
+				case 2:// Busca por data de nascimento
+					break;
+				case 3: // Busca por data de falecimento
+					break;
+				}
 			}
 		});
 		
@@ -81,15 +109,6 @@ public class Busca extends JFrame {
 				}
 			}
 		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Busca() {
-		setTitle("Gerenciador de Cemiterio - Busca");
-		initComponents();
-		handleEvents();
 	}
 	
 	private void initComponents() {
@@ -170,7 +189,7 @@ public class Busca extends JFrame {
 		tableModel.addColumn("Data Falesc.");
 		tableModel.addColumn("Responsavel");
 		
-		JList<String[]> list = new JList<String[]>();
+		list = new JList<String[]>();
 		list.setModel(new AbstractListModel() {
 			String[] values = new String[] {"ID", "Nome", "Data de Nascimento", "Data de Falecimento"};
 			public int getSize() {
