@@ -5,11 +5,32 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class RegistroFinados {
-	ArrayList<Finado> registro = null;
+	public ArrayList<Finado> lista = null;
+	private int numRegistrados;
+	
+	public RegistroFinados() {
+		lista = new ArrayList<Finado>();
+		numRegistrados = 0;
+	}
+	
 	public RegistroFinados(ArrayList<Finado> lista) {
 		if(lista != null) {
-			registro = lista;
+			lista = lista;
+			numRegistrados = lista.size();
 		}
+	}
+	
+	public int getNumRegistros() {
+		return numRegistrados;
+	}
+	
+	public boolean incluirRegistro(Finado reg) {
+		if(lista.add(reg)) {
+			numRegistrados++;
+			//lista.sort();
+			return true;
+		}
+		return false;
 	}
 
 	public static ArrayList<Finado> ordenaLista(ArrayList<Finado> lista, String ordenarPor){
@@ -21,7 +42,7 @@ public class RegistroFinados {
 				@Override
 				public int compare(Finado ID1, Finado ID2){
 					
-					return ID1.getID()> ID2.getID() ? 1:0; // operador tenario
+					return Integer.compare(ID1.getID(), ID2.getID());
 				}
 			});
 			break;
@@ -31,7 +52,7 @@ public class RegistroFinados {
 		        public int compare(Finado fin1, Finado fin2)
 		        {
 
-		            return  fin1.getNome().compareTo(fin2.getNome());
+		            return  (fin1.getNome()+" "+fin1.getSobrenome()).compareTo(fin2.getNome()+" "+fin2.getSobrenome());
 		        }
 		    });
 			

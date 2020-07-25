@@ -2,6 +2,7 @@ package codigos;
 
 public class Contato extends Dados {
 	String telefone;
+	String email;
 	String grauParentesco;
 	
 	public Contato() {
@@ -11,11 +12,13 @@ public class Contato extends Dados {
 
 	public Contato(String nome, String sobrenome,
 			String CPF, String dataDeNascimento,
-			String telefone, String grauParentesco) 
+			String telefone, String grauParentesco,
+			String email) 
 	{
 		super(nome, sobrenome, CPF, dataDeNascimento);
 		this.telefone = telefone;
 		this.grauParentesco = grauParentesco;
+		this.email = email;
 		
 	}
 	

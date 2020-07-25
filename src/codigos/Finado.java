@@ -1,29 +1,28 @@
 package codigos;
 
 public class Finado extends Dados {
-	public int ID;
-	String DataSepultamento;
-	public Contato Parente;
+	private int ID;
+	private String dataSepultamento;
+	private Contato parente;
+	private String descricao;
 	
 	public Finado(int ID,String nome, String sobrenome,
 			String CPF, String dataDeNascimento,String Sepultamento,
-			Contato contato) 
+			String descricao, Contato parente) 
 	{
 		super(nome, sobrenome, CPF, dataDeNascimento);
-		this.Parente = contato;
-		this.DataSepultamento = Sepultamento;
-	}
-	
-	public Finado() {
-		
+		setParente(parente);
+		setDataSepultamento(Sepultamento);
+		setDescricao(descricao);
+		setID(ID);
 	}
 	
 	public String getDataSepultamento() {
-		return this.DataSepultamento;
+		return this.dataSepultamento;
 	}
 
 	public void setDataSepultamento(String dataSepultamento) {
-		this.DataSepultamento = dataSepultamento;
+		this.dataSepultamento = dataSepultamento;
 	}
 	
 	public int getID() {
@@ -32,5 +31,21 @@ public class Finado extends Dados {
 
 	public void setID(int iD) {
 		this.ID = iD;
+	}
+
+	public Contato getParente() {
+		return parente;
+	}
+
+	public void setParente(Contato parente) {
+		this.parente = parente;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 }
