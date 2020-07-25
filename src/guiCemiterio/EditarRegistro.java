@@ -1,12 +1,18 @@
 package guiCemiterio;
 
 import codigos.*;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,9 +22,16 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
@@ -51,6 +64,7 @@ public class EditarRegistro extends JFrame {
 	private Finado fin = null;
 	private RegistroFinados registro = null;
 	private boolean imagemValida = false;
+	String caminhoImagemFinado = null;
 
 	public EditarRegistro() {
 		registro = new RegistroFinados();
@@ -70,7 +84,7 @@ public class EditarRegistro extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				// Busca registro, se encontrar carrega informacao, se nao aparece mensagem
 				
-				fin = null; //buscarID(txtId.getText());
+				//fin = registro.buscarID(txtId.getText());
 				if(fin != null) {
 					registroValido = true;
 					txtNome.setText(fin.getNome());
@@ -90,10 +104,38 @@ public class EditarRegistro extends JFrame {
 			}
 		});
 		
+		btnProcurar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Abre o gerenciador de arquivo, inicialmente na pasta de fotos pre-selecionadas
+				JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory()
+						+ "/Downloads");
+				jfc.setDialogTitle("Selecione uma imagem");
+				jfc.setAcceptAllFileFilterUsed(false);
+				// Filtra as extensoes de arquivos suportadas, nesse caso,, unicamente JPEG
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPEG", "jpg");
+				jfc.addChoosableFileFilter(filter);
+		
+				int returnValue = jfc.showOpenDialog(null);
+				
+				// Verifica se algum arquivo foi selecionado
+				if (returnValue == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = jfc.getSelectedFile();
+					
+					imagemValida = true;
+					caminhoImagemFinado = selectedFile.getAbsolutePath();
+
+					// Poe a imagem na tela
+					lblImagem.setText("");
+					lblImagem.setIcon(new ImageIcon(selectedFile.getAbsolutePath()));
+				} else lblImagem.setText("Foto Invalida");
+			}
+		});
+		
 		btnSalvarESair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO lembrar de salvar as mudancas
+				// Caso o registro seja valido, salvar as alteracoes
 				if(registroValido) {
 					// TODO fazer alteracao no registro
 					String msgErro="";
@@ -111,11 +153,22 @@ public class EditarRegistro extends JFrame {
 						msgErro += "Imagem Invalida";
 					
 					if(msgErro.equals("")) {
-						fin.setNome(txtNome.getText());
-						fin.setSobrenome(txtSobrenome.getText());
-						fin.setCPF(txtDocumento.getText());
-						fin.setDataDeNascimento(txtDataNasc.getText());
-						fin.setDataSepultamento(txtDataFalec.getText());
+						if(imagemValida) {
+							try {
+								copiaImagem(caminhoImagemFinado, String.valueOf(fin.getID()));
+							} catch (IOException e1) {
+								JOptionPane.showMessageDialog(null,
+						                "Erro ao copiar imagem, tente novamente");
+							} finally {
+								
+							}
+							fin.setNome(txtNome.getText());
+							fin.setSobrenome(txtSobrenome.getText());
+							fin.setCPF(txtDocumento.getText());
+							fin.setDataDeNascimento(txtDataNasc.getText());
+							fin.setDataSepultamento(txtDataFalec.getText());
+						}
+						EditarRegistro.this.dispose();
 					} else {
 						JOptionPane.showMessageDialog(null,
 				                "Verifique estes campos:\n"+msgErro);
@@ -123,8 +176,9 @@ public class EditarRegistro extends JFrame {
 					
 				} else {
 					// TODO fazer um painel dizendo que nenhuma alteracao foi feita
+					JOptionPane.showMessageDialog(null,
+			                "Nenhuma alteracao foi feita, tente novamente");
 				}
-				EditarRegistro.this.dispose();
 			}
 		});
 	
@@ -137,7 +191,12 @@ public class EditarRegistro extends JFrame {
 	}
 	
 	
-	
+	private void copiaImagem(String caminhoImagem, String idFinado) throws IOException {
+		Files.copy(Paths.get(caminhoImagem), 
+				Paths.get(System.getProperty("user.dir")+"/fotos/"+idFinado+".jpg"),
+				REPLACE_EXISTING);
+		
+	}
 	
 	
 	
