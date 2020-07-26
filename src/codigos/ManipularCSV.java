@@ -12,7 +12,8 @@ import java.util.ArrayList;
 
 public class ManipularCSV {	
 
-	public static void LerContato(String path, ArrayList <Finado> lista) throws FileNotFoundException {
+	public static void LeituraCSVFinados(String path, 
+			ArrayList <Finado> lista) throws FileNotFoundException {
 		String csvSqlite = ";";
 		String line = "";
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
@@ -20,11 +21,16 @@ public class ManipularCSV {
 			while((line = buffRead.readLine())!=null) {
 				
 				String [] stateStrings = line.split(csvSqlite);
-				Contato contato = new Contato(stateStrings[7], stateStrings[8], stateStrings[9],
-													stateStrings[10], stateStrings[11], stateStrings[12], stateStrings[13]);
-				int conventendo = Integer.parseInt(stateStrings[0]);
-				Finado finado = new Finado(conventendo, stateStrings[1], stateStrings[2], 
-														stateStrings[3], stateStrings[4], stateStrings[5],stateStrings[6], contato);
+				// Le campos do CSV e instancia um registro de finado
+				Finado finado = new Finado(
+						Integer.parseInt(stateStrings[0]), stateStrings[1], stateStrings[2], 
+						stateStrings[3], stateStrings[4], stateStrings[5], stateStrings[6], 
+						new Contato(
+								stateStrings[7], stateStrings[8],
+								stateStrings[9], stateStrings[10], 
+								stateStrings[11], stateStrings[12],
+								stateStrings[13])
+						);
 				
 				lista.add(finado);
 			}
@@ -39,64 +45,56 @@ public class ManipularCSV {
 				System.out.println("ERRO FECHAR ARQUIVO!!");
 			}
 		}
+	}	
+	
+	public static void EscreverCSVFinados (String path, ArrayList <Finado> lista) throws IOException {
+		FileWriter fileWriter = null;			
+		//nome, sobrenome, cpf, data de nascimento, telefone grau de paranteco
+		fileWriter = new FileWriter(path);
+
+		for(Finado fin : lista) {
+			// adiciona o finado
+			fileWriter.append(String.valueOf( fin.getID()));
+			fileWriter.append(";");	
+			fileWriter.append(fin.getNome());
+			fileWriter.append(";");	
+			fileWriter.append(fin.getSobrenome());
+			fileWriter.append(";");	
+			fileWriter.append(fin.getCPF());
+			fileWriter.append(";");	
+			fileWriter.append(fin.getDataDeNascimento());
+			fileWriter.append(";");	
+			fileWriter.append(fin.getDataSepultamento());
+			fileWriter.append(";");				
+			fileWriter.append(fin.getDescricao());
+			fileWriter.append(";");	
+				
+			// Adiciona o parente responsavel do finado
+			fileWriter.append(fin.parente.getNome());
+			fileWriter.append(";");		
+			fileWriter.append(fin.parente.getSobrenome());
+			fileWriter.append(";");		
+			fileWriter.append(fin.parente.getCPF());
+			fileWriter.append(";");		
+			fileWriter.append(fin.parente.getDataDeNascimento());
+			fileWriter.append(";");		
+			fileWriter.append(fin.parente.getTelefone());
+			fileWriter.append(";");		
+			fileWriter.append(fin.parente.getGrauParentesco());
+			fileWriter.append(";");	
+			fileWriter.append(fin.parente.getEmail());
+			fileWriter.append("\n");					
+		}
+		try { 
+			fileWriter.flush();
+			fileWriter.close();
+			System.out.println("Arquivo atualizado");
+		} catch (Exception e) {
+			    e.printStackTrace();
+			    System.out.println("Erro ao fechar arquivo");
+		}
 		
 	}	
-	public static void EscreverContato (String path, ArrayList <Finado> lista) {
-		FileWriter fileWriter = null;
-		try {			
-			//nome, sobrenome, cpf, data de nascimento, telefone grau de paranteco
-			 fileWriter = new FileWriter(path);
-//			 fileWriter.append("ID,nome, sobrenome,CPF,dataDeNascimento,telefone,Endereco,Lote,posX,posY\n");
-			int tam = lista.size();
-			for(int i =0; i < tam; i++) {
-				// adiciona o finado
-				fileWriter.append(String.valueOf( lista.get(i).getID()));
-				fileWriter.append(";");	
-				fileWriter.append(lista.get(i).getCPF()); // 0
-				fileWriter.append(";");	
-				fileWriter.append(lista.get(i).getNome());
-				fileWriter.append(";");	
-				fileWriter.append(lista.get(i).getSobrenome());
-				fileWriter.append(";");	
-				fileWriter.append(lista.get(i).getDataDeNascimento());
-				fileWriter.append(";");	
-				fileWriter.append(lista.get(i).getDataSepultamento());
-				fileWriter.append(";");				
-				fileWriter.append(lista.get(i).getDescricao());
-				fileWriter.append(";");	
-				// adiciona o parente responsavel do finado
-				fileWriter.append(lista.get(i).parente.getNome()); // 5
-				fileWriter.append(";");		
-				fileWriter.append(lista.get(i).parente.getSobrenome());
-				fileWriter.append(";");		
-				fileWriter.append(lista.get(i).parente.getCPF());
-				fileWriter.append(";");		
-				fileWriter.append(lista.get(i).parente.getDataDeNascimento());
-				fileWriter.append(";");		
-				fileWriter.append(lista.get(i).parente.getTelefone());
-				fileWriter.append(";");		
-				fileWriter.append(lista.get(i).parente.getGrauParentesco()); // 10
-				fileWriter.append(";");	
-				fileWriter.append(lista.get(i).parente.getEmail());
-				fileWriter.append("\n");					
-			}
-			 
-		} catch (Exception e) {
-			System.out.println("ERRO ESCRITA!!");
-			 e.printStackTrace();
-			 
-		}finally {
-			try { 
-				fileWriter.flush();
-				fileWriter.close();
-				System.out.println("Arquivo atualizado!!!");
-			} catch (Exception e) {
-				    e.printStackTrace();
-			}
-		
-		}
-	}
-	
 	
 	@SuppressWarnings("null")
 	public static void EscreverAtividade(String path, ArrayList<Atividade> Lista) throws IOException{
@@ -104,7 +102,7 @@ public class ManipularCSV {
 		
 		try {			
 			 fileWriter = new FileWriter(path);			
-			 // escrendo titulo, data, horario, horario, tipo, descrição
+			 // escrendo titulo, data, horario, horario, tipo, descriï¿½ï¿½o
 			 int tam =  Lista.size();
 			 for(int i = 0; i < tam; i++) {
 				fileWriter.append(Lista.get(i).getTitulo());				
