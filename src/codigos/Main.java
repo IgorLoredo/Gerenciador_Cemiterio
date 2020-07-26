@@ -2,7 +2,6 @@ package codigos;
 
 import java.awt.EventQueue;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import guiCemiterio.*;
 
 public class Main {
@@ -12,7 +11,7 @@ public class Main {
 		
 		// Faz a leitura do csv e transfere para o ArrayList
 		try {
-			ManipularCSV.LeituraCSVFinados("Finados.csv", registro.lista);
+			ManipularCSV.LeituraCSVFinados("Finados.csv", registro);
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -24,7 +23,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login frame = new Login();
+					Login frame = new Login(registro);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

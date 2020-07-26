@@ -1,7 +1,6 @@
 package codigos;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,14 +12,14 @@ import java.util.ArrayList;
 public class ManipularCSV {	
 
 	public static void LeituraCSVFinados(String path, 
-			ArrayList <Finado> lista) throws FileNotFoundException {
-		String csvSqlite = ";";
+			RegistroFinados reg) throws FileNotFoundException {
+		
 		String line = "";
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 		try {
 			while((line = buffRead.readLine())!=null) {
-				
-				String [] stateStrings = line.split(csvSqlite);
+				if(line.equals("")) break;
+				String [] stateStrings = line.split(";");
 				// Le campos do CSV e instancia um registro de finado
 				Finado finado = new Finado(
 						Integer.parseInt(stateStrings[0]), stateStrings[1], stateStrings[2], 
@@ -32,7 +31,7 @@ public class ManipularCSV {
 								stateStrings[13])
 						);
 				
-				lista.add(finado);
+				reg.incluirRegistro(finado);
 			}
 			
 		} catch (Exception e) {

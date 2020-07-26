@@ -1,6 +1,10 @@
 package codigos;
 
 import java.io.IOException;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.regex.Pattern;
 
 public class VerificacaoDeInputs {
@@ -15,42 +19,49 @@ public class VerificacaoDeInputs {
 	 */
 	public static boolean verificaNome(String s) {
 		// Verifica se existe algum caracter nao alfabetico no nome
-		boolean stringValida = false;
-		if(Pattern.compile("[0-9\\._!@#$%�&*()_�={}?:/;><,]").matcher(s).find()) {
-			stringValida =true;
-			return stringValida;
+		boolean stringInvalida = false;
+		if(Pattern.compile("[0-9\\._!@#$%�&*()_�={}?:/;><,]").matcher(s).find()) {
+			stringInvalida = true;
+			return stringInvalida;
 		}
 		
-		return stringValida;
+		return stringInvalida;
 	}
 	
 	//Utiliza expressões regulares para verificar se um documento eh valido
 	public static boolean verificaDocumento(String s) {
-		boolean stringValida = false;
+		boolean stringInvalida = false;
 		// Verifica se existe algum caracter nao numerico no documento
 		if(!Pattern.compile("^([0-9])\\w+").matcher(s).find()) {
-			stringValida =true;
-			return stringValida;
+			stringInvalida = true;
 		}
 		
-		return stringValida;
+		return stringInvalida;
 	}
 	
 	//Utiliza expressões regulares para verificar se uma data eh valida
-	public static boolean verificaData(String s) {
-		boolean stringValida = false;
-		// Verifica se existe algum caracter nao numerico no documento
-		if(!Pattern.compile("^([0-9])\\w+").matcher(s).find()) {
-			stringValida =true;
-			return stringValida;
-		}		
-		return stringValida;
+	public static boolean verificaData(String data) {
+		boolean stringInvalida = false;
+		
+		String dateFormat = "dd/MM/uuuu";
+
+	    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat)
+	    .withResolverStyle(ResolverStyle.STRICT);
+	    
+	    try {
+	        LocalDate date = LocalDate.parse(data, dateTimeFormatter);
+	        stringInvalida = false;
+	    } catch (DateTimeParseException e) {
+	       stringInvalida = true;
+	    } finally {
+			return stringInvalida;
+		}
 	}
 	
 	
 	// Utiliza expressões regulares para verificar se um email eh valido
 	public static boolean verificaEmail(String s) {
-		boolean stringValida = false;
+		boolean stringInvalida = false;
 		String sep = "@";
 		
 		Pattern separador = Pattern.compile(sep);
@@ -66,19 +77,19 @@ public class VerificacaoDeInputs {
 		 *  alfabeticos minusculos
 		 */			
 		if(primeiraParte || segundaParte){			
-			stringValida = true;
+			stringInvalida = true;
 		}
 			
-		return stringValida;
+		return stringInvalida;
 	}
 	
 	public static boolean verificaTelefone(String s) {
-		boolean stringValida = false;
+		boolean stringInvalida = false;
 		// Verifica se existe algum caracter nao numerico no telefone
 		if(!Pattern.compile("^([0-9])\\w+").matcher(s).find()) {
-			stringValida =true;
-			return stringValida;
+			stringInvalida = true;
+			return stringInvalida;
 		}				
-		return stringValida;
+		return stringInvalida;
 	}
 }

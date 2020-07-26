@@ -1,8 +1,11 @@
 package codigos;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 public class RegistroFinados {
 	public ArrayList<Finado> lista = null;
@@ -15,7 +18,7 @@ public class RegistroFinados {
 	
 	public RegistroFinados(ArrayList<Finado> lista) {
 		if(lista != null) {
-			lista = lista;
+			this.lista = lista;
 			numRegistrados = lista.size();
 		}
 	}
@@ -27,21 +30,17 @@ public class RegistroFinados {
 	public boolean incluirRegistro(Finado reg) {
 		if(lista.add(reg)) {
 			numRegistrados++;
-			//RegistroFinados.ordenaLista(this.lista, "ID");
 			return true;
 		}
 		return false;
 	}
 	
-	@SuppressWarnings("null")
-	public ArrayList<Finado> buscaRegristo(String key, String busca, int id) {
-		ArrayList<Finado> listaretono = null;
+	public Finado buscaRegristo(String key, String busca) {
 		switch (busca) {
 		case "ID":
-			for(int i =0; i < this.lista.size();i++) {
-				if(this.lista.get(i).getID() == id ) {
-					listaretono.add(this.lista.get(i));
-					return listaretono;
+			for(int i =0 ; i < lista.size();i++) {
+				if(lista.get(i).getID() == Integer.valueOf(key)) {
+					return lista.get(i);
 				}
 			}
 			break;
@@ -49,27 +48,25 @@ public class RegistroFinados {
 		case "NOME":
 			for(int i =0; i < this.lista.size();i++) {
 				if(this.lista.get(i).getNome().compareTo(key) == 0 ) {
-					listaretono.add(this.lista.get(i));
-					return listaretono;
+					return lista.get(i);
 				}
 			}
 			break;
 			
-		case "Cs":
+		case "CPF":
 			for(int i =0; i < this.lista.size();i++) {
 				if(this.lista.get(i).getCPF().compareTo(key) == 0 ) {
-					listaretono.add(this.lista.get(i));
-					return listaretono;
+					return lista.get(i);
 				}
 			}
 			break;
 		default:
 			break;
 		}
-		return listaretono;
+		return null;
 	}
 
-	public static ArrayList<Finado> ordenaLista(ArrayList<Finado> lista, String ordenarPor){
+	public static void ordenaLista(ArrayList<Finado> lista, String ordenarPor){
 		
 		switch(ordenarPor) {
 		case "ID":
@@ -95,26 +92,38 @@ public class RegistroFinados {
 			break;
 			
 		case "DATANASC":
+			
+			
 			Collections.sort(lista, new Comparator<Finado>() {
 				@Override
 				public int compare(Finado fin1, Finado fin2) {	
-					return fin1.getDataDeNascimento().compareTo(fin2.getDataDeNascimento());
+					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		            Date date1 = null;
+		            Date date2 = null;
+					try {
+						date1 = sdf.parse(fin1.getDataDeNascimento());
+						date2 = sdf.parse(fin2.getDataDeNascimento());
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return date1.compareTo(date2);
 				}
 			});			
 			break;
 			
-		case "DATAFALESC": 
+		/*case "DATAFALESC": 
 			Collections.sort(lista,new Comparator<Finado>() {
 
 				@Override
 				public int compare(Finado fin1, Finado fin2) {
+					
 					return fin1.getDataSepultamento().compareTo(fin2.getDataSepultamento());
 				}				
 				});
 			
-			break;
+			break;*/
 		
-		}		
-		return null;
+		}
 	}
 }
