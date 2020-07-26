@@ -63,7 +63,7 @@ public class EditarRegistro extends JFrame {
 	private JLabel lblRegistroNaoEncontrado;
 	private Finado fin = null;
 	private RegistroFinados registro = null;
-	private boolean imagemValida = false;
+	private boolean imagemAlterada = false;
 	String caminhoImagemFinado = null;
 
 	public EditarRegistro() {
@@ -83,24 +83,25 @@ public class EditarRegistro extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// Busca registro, se encontrar carrega informacao, se nao aparece mensagem
-				
-				//fin = registro.buscarID(txtId.getText());
-				if(fin != null) {
-					registroValido = true;
-					txtNome.setText(fin.getNome());
-					txtSobrenome.setText(fin.getSobrenome());
-					txtDataNasc.setText(fin.getDataDeNascimento());
-					txtDataFalec.setText(fin.getDataSepultamento());
-					txtDocumento.setText(fin.getCPF());
-					txtDescricao.setText(fin.getDescricao());
-					lblImagem.setText("");
-					lblImagem.setIcon(new ImageIcon(System.getProperty("user.dir")+"/fotos/"+
-					   fin.getID() + ".jpg"));
-				} else {
-					registroValido = false;
-					lblRegistroNaoEncontrado.setText("Nenhum registro encontrado");
-				}
-				
+				if(!VerificacaoDeInputs.verificaDocumento(txtId.getText())) {
+					Finado fin = registro.buscaRegristo(txtId.getText(), "ID");
+
+					if(fin != null) {
+						registroValido = true;
+						txtNome.setText(fin.getNome());
+						txtSobrenome.setText(fin.getSobrenome());
+						txtDataNasc.setText(fin.getDataDeNascimento());
+						txtDataFalec.setText(fin.getDataSepultamento());
+						txtDocumento.setText(fin.getCPF());
+						txtDescricao.setText(fin.getDescricao());
+						lblImagem.setText("");
+						lblImagem.setIcon(new ImageIcon("fotos/"+
+							fin.getID() + ".jpg"));
+					} else {
+						registroValido = false;
+						lblRegistroNaoEncontrado.setText("Nenhum registro encontrado");
+					}
+				} else lblRegistroNaoEncontrado.setText("Registro digitado invalido");
 			}
 		});
 		
@@ -112,7 +113,7 @@ public class EditarRegistro extends JFrame {
 						+ "/Downloads");
 				jfc.setDialogTitle("Selecione uma imagem");
 				jfc.setAcceptAllFileFilterUsed(false);
-				// Filtra as extensoes de arquivos suportadas, nesse caso,, unicamente JPEG
+				// Filtra as extensoes de arquivos suportadas, nesse caso, unicamente JPEG
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPEG", "jpg");
 				jfc.addChoosableFileFilter(filter);
 		
@@ -122,12 +123,12 @@ public class EditarRegistro extends JFrame {
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = jfc.getSelectedFile();
 					
-					imagemValida = true;
 					caminhoImagemFinado = selectedFile.getAbsolutePath();
 
 					// Poe a imagem na tela
 					lblImagem.setText("");
 					lblImagem.setIcon(new ImageIcon(selectedFile.getAbsolutePath()));
+					imagemAlterada = true;
 				} else lblImagem.setText("Foto Invalida");
 			}
 		});
@@ -139,41 +140,38 @@ public class EditarRegistro extends JFrame {
 				if(registroValido) {
 					// TODO fazer alteracao no registro
 					String msgErro="";
-					if(!VerificacaoDeInputs.verificaNome(txtNome.getText()))
+					if(VerificacaoDeInputs.verificaNome(txtNome.getText()))
 						msgErro += "Nome Invalido\n";
-					if(!VerificacaoDeInputs.verificaNome(txtSobrenome.getText()))
+					if(VerificacaoDeInputs.verificaNome(txtSobrenome.getText()))
 						msgErro += "Sobrenome Invalido\n";
-					if(!VerificacaoDeInputs.verificaData(txtDataNasc.getText()))
+					if(VerificacaoDeInputs.verificaData(txtDataNasc.getText()))
 						msgErro += "Data de Nascimento Invalida\n";
-					if(!VerificacaoDeInputs.verificaData(txtDataFalec.getText()))
+					if(VerificacaoDeInputs.verificaData(txtDataFalec.getText()))
 						msgErro += "Data de Falecimento Invalida\n";
-					if(!VerificacaoDeInputs.verificaDocumento(txtDocumento.getText()))
-						msgErro += "Documento Invalido\n";
-					if(!imagemValida)
-						msgErro += "Imagem Invalida";
+					if(VerificacaoDeInputs.verificaDocumento(txtDocumento.getText()))
+						msgErro += "Documento Invalido\n";					
 					
 					if(msgErro.equals("")) {
-						if(imagemValida) {
+						if(imagemAlterada) {
 							try {
+								System.out.println(caminhoImagemFinado);
 								copiaImagem(caminhoImagemFinado, String.valueOf(fin.getID()));
 							} catch (IOException e1) {
-								JOptionPane.showMessageDialog(null,
-						                "Erro ao copiar imagem, tente novamente");
-							} finally {
-								
+								JOptionPane.showMessageDialog(null, "Erro ao copiar imagem para o banco");
 							}
-							fin.setNome(txtNome.getText());
-							fin.setSobrenome(txtSobrenome.getText());
-							fin.setCPF(txtDocumento.getText());
-							fin.setDataDeNascimento(txtDataNasc.getText());
-							fin.setDataSepultamento(txtDataFalec.getText());
 						}
-						EditarRegistro.this.dispose();
+						fin.setNome(txtNome.getText());
+						fin.setSobrenome(txtSobrenome.getText());
+						fin.setCPF(txtDocumento.getText());
+						fin.setDataDeNascimento(txtDataNasc.getText());
+						fin.setDataSepultamento(txtDataFalec.getText());
+						JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso");
+						EditarRegistro.this.dispose();			
 					} else {
+						// Painel de mensagem com mensagens de erro
 						JOptionPane.showMessageDialog(null,
 				                "Verifique estes campos:\n"+msgErro);
 					}
-					
 				} else {
 					// TODO fazer um painel dizendo que nenhuma alteracao foi feita
 					JOptionPane.showMessageDialog(null,
@@ -193,7 +191,7 @@ public class EditarRegistro extends JFrame {
 	
 	private void copiaImagem(String caminhoImagem, String idFinado) throws IOException {
 		Files.copy(Paths.get(caminhoImagem), 
-				Paths.get(System.getProperty("user.dir")+"/fotos/"+idFinado+".jpg"),
+				Paths.get("fotos/"+idFinado+".jpg"),
 				REPLACE_EXISTING);
 		
 	}

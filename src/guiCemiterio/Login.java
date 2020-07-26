@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import codigos.RegistroFinados;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -24,12 +27,26 @@ import java.util.Arrays;
 
 public class Login extends JFrame {
 
-	private static Login frame;
 	private JPanel contentPane;
 	private JPasswordField passwordField;
 	private JTextField textUsuario;
 	private JButton btnEntrar;
+	RegistroFinados registro = null;
 
+	public Login() {
+		registro = new RegistroFinados();
+		setTitle("Gerenciador de Cemiterio - Login");
+		initComponents();
+		eventsHandler();
+	}
+	
+	public Login(RegistroFinados reg) {
+		registro = reg;
+		setTitle("Gerenciador de Cemiterio - Login");
+		initComponents();
+		eventsHandler();
+	}
+	
 	
 	private void eventsHandler() {
 		// Limpa o texto escrito em Usuario
@@ -56,12 +73,11 @@ public class Login extends JFrame {
 				
 				if(textUsuario.getText().equals(usuario) 
 						&& Arrays.equals(senha, passwordField.getPassword())) {
-					frame.setVisible(false);
-					frame.dispose();
-					new Home().setVisible(true);
+					Login.this.dispose();
+					new Home(registro).setVisible(true);
 				} else {
 					JOptionPane.showMessageDialog(null,
-			                "Usuario e/ou senha incorretos");
+			                "Usuario e/ou senha incorretos\nDica: admin | 123");
 				}
 				
 			}
@@ -93,7 +109,7 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new Login();
+					Login frame = new Login();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -105,11 +121,6 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Login() {
-		setTitle("Gerenciador de Cemiterio - Login");
-		initComponents();
-		eventsHandler();
-	}
 	
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

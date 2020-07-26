@@ -134,71 +134,65 @@ public class Incluir extends JFrame {
 		btnSalvarESair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				/*String msgErro="";
-				if(!VerificacaoDeInputs.verificaNome(textNome.getText()))
+				String msgErro="";
+				if(VerificacaoDeInputs.verificaNome(textNome.getText()))
 					msgErro += "Nome Invalido\n";
-				if(!VerificacaoDeInputs.verificaNome(textSobrenome.getText()))
+				if(VerificacaoDeInputs.verificaNome(textSobrenome.getText()))
 					msgErro += "Sobrenome Invalido\n";
-				if(!VerificacaoDeInputs.verificaData(txtDataNascimento.getText()))
+				if(VerificacaoDeInputs.verificaData(txtDataNascimento.getText()))
 					msgErro += "Data de Nascimento Invalida\n";
-				if(!VerificacaoDeInputs.verificaData(textDataFalecimento.getText()))
+				if(VerificacaoDeInputs.verificaData(textDataFalecimento.getText()))
 					msgErro += "Data de Falecimento Invalida\n";
-				if(!VerificacaoDeInputs.verificaDocumento(txtDigiteODocumento.getText()))
+				if(VerificacaoDeInputs.verificaDocumento(txtDigiteODocumento.getText()))
 					msgErro += "Documento Invalido\n";
 				
-				if(!VerificacaoDeInputs.verificaNome(textContatoNome.getText()))
+				if(VerificacaoDeInputs.verificaNome(textContatoNome.getText()))
 					msgErro += "Nome do Responsavel Invalido\n";
-				if(!VerificacaoDeInputs.verificaNome(textContatoSobrenome.getText()))
+				if(VerificacaoDeInputs.verificaNome(textContatoSobrenome.getText()))
 					msgErro += "Sobrenome do Responsavel Invalido\n";
-				if(!VerificacaoDeInputs.verificaNome(textContatoGraudeParentesco.getText()))
+				if(VerificacaoDeInputs.verificaNome(textContatoGraudeParentesco.getText()))
 					msgErro += "Grau de Parentesco Invalido\n";
-				if(!VerificacaoDeInputs.verificaDocumento(textContatoDocumento.getText()))
+				if(VerificacaoDeInputs.verificaDocumento(textContatoDocumento.getText()))
 					msgErro += "Documento do Responsavel Invalido\n";
-				if(!VerificacaoDeInputs.verificaEmail(txtEmailContato.getText()))
+				if(VerificacaoDeInputs.verificaEmail(txtEmailContato.getText()))
 					msgErro += "Email Invalido\n";
-				if(!VerificacaoDeInputs.verificaTelefone(textTelefone.getText()))
+				if(VerificacaoDeInputs.verificaTelefone(textTelefone.getText()))
 					msgErro += "Telefone Invalido\n";
 				if(!imagemValida)
 					msgErro += "Imagem Invalida\n";
 				
 				
 				if(msgErro.equals("")) {
-					// Cria Finado, gera ID
-					//copiaImagem(caminhoImagem, idFinado);
-					Incluir.this.dispose();
+					Finado fin = new Finado(registro.getNumRegistros()+1000,
+							textNome.getText(), textSobrenome.getText(),
+							txtDigiteODocumento.getText(), txtDataNascimento.getText(),
+							textDataFalecimento.getText(), txtDescricao.getText(),
+							new Contato(textContatoNome.getText(),
+									textContatoSobrenome.getText(), textContatoDocumento.getText(),
+									txtContatoDataNascimento.getText(),textTelefone.getText(),
+									textContatoGraudeParentesco.getText(),
+									txtEmailContato.getText()));
 					
+					try {
+						copiaImagem(caminhoImagemFinado, String.valueOf(fin.getID()));
+					} catch (IOException e1) {
+						JOptionPane.showMessageDialog(null, "Erro ao copiar imagem para o banco");
+					}
+					registro.incluirRegistro(fin);
+					JOptionPane.showMessageDialog(null, "Registro incluido com sucesso");
+					Incluir.this.dispose();			
 				} else {
 					// Painel de mensagem com mensagens de erro
 					JOptionPane.showMessageDialog(null,
 			                "Verifique estes campos:\n"+msgErro);
 				}
 				
-			*/
 				
 				// Apos verificar se o conteudo dos campos de texto sao validos
 				// criamos um cadastro e adicionamos no registro geral 
-				Finado fin = new Finado(registro.getNumRegistros()+1000,
-						textNome.getText(), textSobrenome.getText(),
-						txtDigiteODocumento.getText(), txtDataNascimento.getText(),
-						textDataFalecimento.getText(), txtDescricao.getText(),
-						new Contato(textContatoNome.getText(),
-								textContatoSobrenome.getText(), textContatoDocumento.getText(),
-								txtContatoDataNascimento.getText(),textTelefone.getText(),
-								textContatoGraudeParentesco.getText(),
-								txtEmailContato.getText()));		
+						
 				
 				// Verifica se a inclusao foi feita corretamente
-				if(imagemValida) {
-					if(registro.incluirRegistro(fin)) {
-						try {
-							copiaImagem(caminhoImagemFinado, String.valueOf(fin.getID()));
-						} catch (IOException e1) {
-							JOptionPane.showMessageDialog(null, "Erro ao copiar imagem para o banco");
-						}
-						JOptionPane.showMessageDialog(null, "Registro incluido com sucesso");
-						Incluir.this.dispose();
-					}
-				} else JOptionPane.showMessageDialog(null, "Erro ao incluir registro");
 			}
 			
 		});

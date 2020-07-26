@@ -33,7 +33,6 @@ public class Busca extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private DefaultTableModel tableModel;
-	private JTextArea txtrDigiteAqui;
 	private boolean verificaTexto = false;
 	private JButton btnAplicar;
 	private JButton btnVoltar;
@@ -54,27 +53,30 @@ public class Busca extends JFrame {
 	}
 	
 	private void handleEvents() {
-		txtrDigiteAqui.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(!verificaTexto) {
-					txtrDigiteAqui.setText("");
-					verificaTexto = true;
-				}
-			}
-		});
 		
 		btnAplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switch(list.getSelectedIndex()) {
 				case 0: // Busca por ID
+					RegistroFinados.ordenaLista(registro.lista, "ID");
 					break;
 				case 1: // Busca por nome
+					RegistroFinados.ordenaLista(registro.lista, "NOME");
 					break;
 				case 2:// Busca por data de nascimento
 					break;
 				case 3: // Busca por data de falecimento
 					break;
+				}
+				
+				tableModel.setNumRows(0);
+				for(Finado finado : registro.lista) {
+					tableModel.addRow(new String[] {
+						String.valueOf(finado.getID()),
+						finado.getNome()+" "+finado.getSobrenome(),
+						finado.getDataDeNascimento(),
+						finado.getDataSepultamento(),
+					});
 				}
 			}
 		});
@@ -125,11 +127,6 @@ public class Busca extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
-		txtrDigiteAqui = new JTextArea();
-		
-		txtrDigiteAqui.setFont(new Font("Dialog", Font.PLAIN, 16));
-		txtrDigiteAqui.setText("Digite aqui");
-		
 		btnAplicar = new JButton("Aplicar");
 		
 		btnAplicar.setForeground(new Color(0, 0, 0));
@@ -152,29 +149,22 @@ public class Busca extends JFrame {
 							.addComponent(lblBuscarPor)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
-							.addGap(13)
-							.addComponent(txtrDigiteAqui, GroupLayout.PREFERRED_SIZE, 336, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-							.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addComponent(btnAplicar, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(btnAplicar, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 431, Short.MAX_VALUE)
+							.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(9)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtrDigiteAqui, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-								.addComponent(btnAplicar)
-								.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(scrollPane, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-								.addComponent(lblBuscarPor, Alignment.LEADING))))
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(Alignment.LEADING, gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
+							.addComponent(btnAplicar)
+							.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblBuscarPor, Alignment.LEADING))
 					.addGap(29)
 					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 383, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())

@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import codigos.ManipularCSV;
 import codigos.RegistroFinados;
 
 import javax.swing.JLabel;
@@ -26,6 +27,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+
 import javax.swing.ImageIcon;
 
 public class Home extends JFrame {
@@ -60,6 +63,22 @@ public class Home extends JFrame {
 					public void run() {
 						try {
 							Busca frame = new Busca(registro);
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+		
+		btnVisualizarMemorial.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Memorial frame = new Memorial(registro);
 							frame.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -105,7 +124,29 @@ public class Home extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO lembrar de salvar os arquivos em seus respectivos CSV
+				try {
+					ManipularCSV.EscreverCSVFinados("Finados.csv", registro.lista);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				Home.this.dispose();
+			}
+		});
+		
+		btnEditarRegistro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							EditarRegistro frame = new EditarRegistro(registro);
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
 			}
 		});
 	}
@@ -174,25 +215,11 @@ public class Home extends JFrame {
 		contentPane.add(btnRegistrarFinado);
 		
 		btnEditarRegistro = new JButton("Editar Registro");
-		btnEditarRegistro.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							EditarRegistro frame = new EditarRegistro();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
 		btnEditarRegistro.setBounds(268, 162, 198, 25);
 		contentPane.add(btnEditarRegistro);
 		
 		btnVisualizarMemorial = new JButton("Visualizar Memorial");
+		
 		btnVisualizarMemorial.setBounds(268, 49, 198, 25);
 		contentPane.add(btnVisualizarMemorial);
 		
