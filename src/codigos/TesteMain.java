@@ -2,7 +2,7 @@ package codigos;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
+
 
 public class TesteMain {
 
@@ -36,6 +36,8 @@ public class TesteMain {
 			String igor = EntradaTeclado.leString();
 			System.out.println(VerificacaoDeInputs.verificaData(igor));
 			System.out.println(VerificacaoDeInputs.verificaDocumento(igor));
+			System.out.println(VerificacaoDeInputs.verificaNome(igor));
+			System.out.println(VerificacaoDeInputs.verificaEmail(igor));
 	}
 
 }

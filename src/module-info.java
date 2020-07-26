@@ -3,4 +3,5 @@ module Gerenciador_Cemiterio {
 	exports codigos;
 
 	requires java.desktop;
+	requires jdk.jdeps;
 }
