@@ -32,6 +32,42 @@ public class RegistroFinados {
 		}
 		return false;
 	}
+	
+	@SuppressWarnings("null")
+	public ArrayList<Finado> buscaRegristo(String key, String busca, int id) {
+		ArrayList<Finado> listaretono = null;
+		switch (busca) {
+		case "ID":
+			for(int i =0; i < this.lista.size();i++) {
+				if(this.lista.get(i).getID() == id ) {
+					listaretono.add(this.lista.get(i));
+					return listaretono;
+				}
+			}
+			break;
+
+		case "NOME":
+			for(int i =0; i < this.lista.size();i++) {
+				if(this.lista.get(i).getNome().compareTo(key) == 0 ) {
+					listaretono.add(this.lista.get(i));
+					return listaretono;
+				}
+			}
+			break;
+			
+		case "Cs":
+			for(int i =0; i < this.lista.size();i++) {
+				if(this.lista.get(i).getCPF().compareTo(key) == 0 ) {
+					listaretono.add(this.lista.get(i));
+					return listaretono;
+				}
+			}
+			break;
+		default:
+			break;
+		}
+		return listaretono;
+	}
 
 	public static ArrayList<Finado> ordenaLista(ArrayList<Finado> lista, String ordenarPor){
 		
@@ -78,9 +114,7 @@ public class RegistroFinados {
 			
 			break;
 		
-		}
-		
-		
+		}		
 		return null;
 	}
 }
