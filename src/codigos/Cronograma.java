@@ -3,6 +3,8 @@ package codigos;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Cronograma {
 	public ArrayList <Atividade> cronograma;
@@ -15,10 +17,14 @@ public class Cronograma {
 		this.cronograma.add(a);
 	}
 		
-	public ArrayList<Atividade> pesquisaData(//Data 1 e Data 2
-			){
+	public ArrayList<Atividade> pesquisaData(String data1, String data2){
 		ArrayList<Atividade> listaDividida = null;
-		// A partir das datas selecionadas, dividir a lista		
+		for(int i=0; i < this.cronograma.size();i++) {
+			if(this.cronograma.get(i).getData().compareTo(data1) >= 0 || this.cronograma.get(i).getData().compareTo(data2) <= 0 ) {				
+				listaDividida.add(this.cronograma.get(i));
+			}
+		}
+		Cronograma.SortAtividade(listaDividida);
 		return listaDividida;
 	}
 	
@@ -43,4 +49,16 @@ public class Cronograma {
 			e.getLocalizedMessage();
 		}
 	}
+	
+	public static void SortAtividade(ArrayList<Atividade> lista) {
+		Collections.sort(lista,new Comparator<Atividade>(				
+				) {
+					@Override
+					public int compare(Atividade ativ1, Atividade ativ2) {
+						return ativ1.getData().compareTo(ativ2.getData());
+					}
+		});
+	}
+	
+	
 }
