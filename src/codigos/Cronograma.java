@@ -13,15 +13,12 @@ public class Cronograma {
 	
 	public void addEvento(Atividade a) {
 		this.cronograma.add(a);
-		
 	}
 		
 	public ArrayList<Atividade> pesquisaData(//Data 1 e Data 2
 			){
 		ArrayList<Atividade> listaDividida = null;
-		// A partir das datas selecionadas, dividir a lista
-		
-		
+		// A partir das datas selecionadas, dividir a lista		
 		return listaDividida;
 	}
 	

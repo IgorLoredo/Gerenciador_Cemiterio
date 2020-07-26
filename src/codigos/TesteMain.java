@@ -2,6 +2,7 @@ package codigos;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class TesteMain {
 
@@ -14,30 +15,27 @@ public class TesteMain {
 //				lista.add(ativ);
 //			}
 			
-			for(int i = 0; i < 4; i++) {
-				System.out.println("morte");
-				Finado nees = new Finado();
-				String iD = EntradaTeclado.leString();
-				nees.setDataDeNascimento(iD);
-				listaReg.incluirRegistro(nees);
-				
-			}
+//			for(int i = 0; i < 4; i++) {
+//				System.out.println("morte");
+//				Finado nees = new Finado();
+//				String iD = EntradaTeclado.leString();
+//				nees.setDataDeNascimento(iD);
+//				listaReg.incluirRegistro(nees);
+//				
+//			}
+//			RegistroFinados.ordenaLista(listaReg.lista, "DATAFALESC");
 			
-			RegistroFinados.ordenaLista(listaReg.lista, "DATAFALESC");
-			
-			for(int i =0; i < 4; i++) {
-				System.out.println(listaReg.lista.get(i).getDataDeNascimento());
-			}
 			
 //			ManipularCSV.LeituraAtividade("Atividade.csv", lista);
 //			ManipularCSV.EscreverAtividade("Atividade.csv", lista);
-			System.out.println(lista.size());
-			for(int i = 0; i < lista.size(); i++) {
-				System.out.println(lista.get(i).getTitulo());
-			}
-			
-			
-			
+//			System.out.println(lista.size());
+//			for(int i = 0; i < lista.size(); i++) {
+//				System.out.println(lista.get(i).getTitulo());
+//			}
+			System.out.println("figo");
+			String igor = EntradaTeclado.leString();
+			System.out.println(VerificacaoDeInputs.verificaData(igor));
+			System.out.println(VerificacaoDeInputs.verificaDocumento(igor));
 	}
 
 }

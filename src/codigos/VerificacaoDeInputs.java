@@ -25,7 +25,10 @@ public class VerificacaoDeInputs {
 	public static boolean verificaDocumento(String s) {
 		boolean stringValida = false;
 		// Verifica se existe algum caracter nao numerico no documento
-		
+		if(!Pattern.compile("^[a-zA-Z0-9]+$").matcher(s).find()) {
+			stringValida =true;
+			return stringValida;
+		}
 		
 		return stringValida;
 	}
@@ -34,7 +37,10 @@ public class VerificacaoDeInputs {
 	public static boolean verificaData(String s) {
 		boolean stringValida = false;
 		// Verifica se existe algum caracter nao numerico no documento
-		
+		if(!Pattern.compile("[a-zA-Z]").matcher(s).find()) {
+			stringValida =true;
+			return stringValida;
+		}
 		
 		return stringValida;
 	}
