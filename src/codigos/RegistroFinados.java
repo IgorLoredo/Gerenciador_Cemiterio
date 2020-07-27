@@ -36,10 +36,10 @@ public class RegistroFinados {
 	}
 	
 	public Finado buscaRegristo(String key, String busca) {
-		switch (busca) {
+		switch (busca) { // pesquisa por nome, id e cpf
 		case "ID":
 			for(int i =0 ; i < lista.size();i++) {
-				if(lista.get(i).getID() == Integer.valueOf(key)) {
+				if(lista.get(i).getID() == Integer.valueOf(key)) { 
 					return lista.get(i);
 				}
 			}
@@ -68,14 +68,14 @@ public class RegistroFinados {
 
 	public static void ordenaLista(ArrayList<Finado> lista, String ordenarPor){
 		
-		switch(ordenarPor) {
+		switch(ordenarPor) { // ordenaçção por id, nome e data de nascimento e morte 
 		case "ID":
 			Collections.sort(lista, new Comparator<Finado>() {
 
 				@Override
 				public int compare(Finado ID1, Finado ID2){
 					
-					return Integer.compare(ID1.getID(), ID2.getID());
+					return Integer.compare(ID1.getID(), ID2.getID()); // metodo de comparação 
 				}
 			});
 			break;
@@ -83,17 +83,14 @@ public class RegistroFinados {
 		case "NOME": 
 			Collections.sort(lista, new Comparator<Finado>() {
 		        @Override
-		        public int compare(Finado fin1, Finado fin2)
-		        {
-
+		        public int compare(Finado fin1, Finado fin2){ // 
+		        	//  metodos de comparação
 		            return  (fin1.getNome()+" "+fin1.getSobrenome()).compareTo(fin2.getNome()+" "+fin2.getSobrenome());
-		        }
+		        } 
 		    });			
 			break;
 			
-		case "DATANASC":
-			
-			
+		case "DATANASC":			
 			Collections.sort(lista, new Comparator<Finado>() {
 				@Override
 				public int compare(Finado fin1, Finado fin2) {	
@@ -107,7 +104,7 @@ public class RegistroFinados {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					return date1.compareTo(date2);
+					return date1.compareTo(date2); // metodo de comparação 
 				}
 			});			
 			break;
@@ -127,7 +124,7 @@ public class RegistroFinados {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					return date1.compareTo(date2);
+					return date1.compareTo(date2);// metodo de comparação 
 				}				
 				});
 			break;

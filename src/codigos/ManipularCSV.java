@@ -17,6 +17,7 @@ public class ManipularCSV {
 		String line = "";
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 		try {
+			// leitura linha por linha
 			while((line = buffRead.readLine())!=null) {
 				if(line.equals("")) break;
 				String [] stateStrings = line.split(";");
@@ -84,7 +85,7 @@ public class ManipularCSV {
 				fileWriter.append(fin.parente.getEmail());
 				fileWriter.append("\n");					
 			}			
-			fileWriter.flush();
+			fileWriter.flush(); /// atualiza e fecha o arquivo
 			fileWriter.close();
 			System.out.println("Arquivo atualizado");
 		} catch (Exception e) {
