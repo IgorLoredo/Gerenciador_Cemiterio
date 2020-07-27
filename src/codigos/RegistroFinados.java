@@ -39,13 +39,13 @@ public class RegistroFinados {
 		switch (busca) { // pesquisa por nome, id e cpf
 		case "ID":
 			for(int i =0 ; i < lista.size();i++) {
-				if(lista.get(i).getID() == Integer.valueOf(key)) { 
+				if(lista.get(i).getID() == Integer.valueOf(key)) {  
 					return lista.get(i);
 				}
 			}
 			break;
 
-		case "NOME":
+		case "NOME": 
 			for(int i =0; i < this.lista.size();i++) {
 				if(this.lista.get(i).getNome().compareTo(key) == 0 ) {
 					return lista.get(i);
@@ -53,7 +53,7 @@ public class RegistroFinados {
 			}
 			break;
 			
-		case "CPF":
+		case "CPF": // retorna o 
 			for(int i =0; i < this.lista.size();i++) {
 				if(this.lista.get(i).getCPF().compareTo(key) == 0 ) {
 					return lista.get(i);
