@@ -37,7 +37,6 @@ public class Home extends JFrame {
 	DefaultTableModel tableModel = new DefaultTableModel();
 	private JButton btnBuscarFinado;
 	private JButton btnVisualizarMemorial;
-	private JButton btnConsultarConograma;
 	private JButton btnRegistrarFinado;
 	private JButton btnEditarRegistro;
 	private JButton btnSalvarESair;
@@ -79,22 +78,6 @@ public class Home extends JFrame {
 					public void run() {
 						try {
 							Memorial frame = new Memorial(registro);
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		
-		btnConsultarConograma.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							Cronograma frame = new Cronograma();
 							frame.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -202,20 +185,16 @@ public class Home extends JFrame {
 		lblImagemcampo.setIcon(new ImageIcon(Home.class.getResource("/recursos/campo.jpg")));
 		contentPane.add(lblImagemcampo);
 		
-		btnConsultarConograma = new JButton("Consultar Conograma");
-		btnConsultarConograma.setBounds(268, 86, 198, 25);
-		contentPane.add(btnConsultarConograma);
-		
 		btnBuscarFinado = new JButton("Buscar Finado");
 		btnBuscarFinado.setBounds(268, 12, 198, 25);
 		contentPane.add(btnBuscarFinado);
 		
 		btnRegistrarFinado = new JButton("Registrar Finado");
-		btnRegistrarFinado.setBounds(268, 125, 198, 25);
+		btnRegistrarFinado.setBounds(268, 86, 198, 25);
 		contentPane.add(btnRegistrarFinado);
 		
 		btnEditarRegistro = new JButton("Editar Registro");
-		btnEditarRegistro.setBounds(268, 162, 198, 25);
+		btnEditarRegistro.setBounds(269, 123, 198, 25);
 		contentPane.add(btnEditarRegistro);
 		
 		btnVisualizarMemorial = new JButton("Visualizar Memorial");

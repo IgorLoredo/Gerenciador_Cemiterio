@@ -98,8 +98,7 @@ public class Incluir extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// Abre o gerenciador de arquivo, inicialmente na pasta de fotos pre-selecionadas
-				JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory()
-						+ "/Downloads");
+				JFileChooser jfc = new JFileChooser("fotosReferencia");
 				jfc.setDialogTitle("Selecione uma imagem");
 				jfc.setAcceptAllFileFilterUsed(false);
 				// Filtra as extensoes de arquivos suportadas, nesse caso,, unicamente JPEG
@@ -266,7 +265,6 @@ public class Incluir extends JFrame {
 		
 		txtDigiteODocumento = new JTextField();
 		txtDigiteODocumento.setFont(new Font("Dialog", Font.PLAIN, 14));
-		txtDigiteODocumento.setText("Digite o documento");
 		txtDigiteODocumento.setColumns(10);
 		
 		JLabel lblDataDeNascimento = new JLabel("Data de nasc:");
@@ -311,57 +309,55 @@ public class Incluir extends JFrame {
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblDescricao)
-					.addGap(282)
-					.addComponent(lblFoto)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblFotocaminho)
-					.addContainerGap(321, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 341, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblImagem)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnProcurar)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblNome)
+							.addContainerGap()
+							.addComponent(lblDescricao)
+							.addGap(282)
+							.addComponent(lblFoto)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textNome, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE))
+							.addComponent(lblFotocaminho))
 						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 341, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblDataDeNascimento)
-								.addComponent(lblDocumento))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(txtDataNascimento)
-								.addComponent(txtDigiteODocumento, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
-					.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblImagem)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnProcurar))))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblDataDeFalecimento)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textDataFalecimento, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
+							.addContainerGap()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblNome)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textNome, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblDataDeNascimento)
+										.addComponent(lblDocumento))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(txtDataNascimento)
+										.addComponent(txtDigiteODocumento, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
+							.addPreferredGap(ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblDataDeFalecimento)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textDataFalecimento, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblSobrenome)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textSobrenome, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblSobrenome)
+							.addGap(514)
+							.addComponent(btnVoltar)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textSobrenome, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(480)
-					.addComponent(btnVoltar)
-					.addGap(18)
-					.addComponent(btnSalvarESair))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(pnlContato, GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+							.addComponent(btnSalvarESair))
+						.addComponent(pnlContato, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -397,11 +393,15 @@ public class Incluir extends JFrame {
 							.addComponent(lblImagem))
 						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnProcurar))
-					.addPreferredGap(ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnSalvarESair)
-						.addComponent(btnVoltar))
-					.addContainerGap())
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+							.addComponent(btnSalvarESair)
+							.addContainerGap())
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnVoltar)
+							.addContainerGap())))
 		);
 		panel_1.setLayout(null);
 		
@@ -432,7 +432,6 @@ public class Incluir extends JFrame {
 		
 		textContatoDocumento = new JTextField();
 		textContatoDocumento.setFont(new Font("Dialog", Font.PLAIN, 14));
-		textContatoDocumento.setText("Digite o documento");
 		textContatoDocumento.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("Email:");
@@ -446,7 +445,7 @@ public class Incluir extends JFrame {
 		
 		textTelefone = new JTextField();
 		textTelefone.setFont(new Font("Dialog", Font.PLAIN, 14));
-		textTelefone.setText("(--)---------");
+		textTelefone.setText("Ex.: 21999341232");
 		textTelefone.setColumns(10);
 		
 		JLabel lblGrauDeParentesco = new JLabel("Grau de parentesco:");

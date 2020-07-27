@@ -84,7 +84,7 @@ public class EditarRegistro extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				// Busca registro, se encontrar carrega informacao, se nao aparece mensagem
 				if(!VerificacaoDeInputs.verificaDocumento(txtId.getText())) {
-					Finado fin = registro.buscaRegristo(txtId.getText(), "ID");
+					fin = registro.buscaRegristo(txtId.getText(), "ID");
 
 					if(fin != null) {
 						registroValido = true;
@@ -109,8 +109,7 @@ public class EditarRegistro extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// Abre o gerenciador de arquivo, inicialmente na pasta de fotos pre-selecionadas
-				JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory()
-						+ "/Downloads");
+				JFileChooser jfc = new JFileChooser("fotosReferencia");
 				jfc.setDialogTitle("Selecione uma imagem");
 				jfc.setAcceptAllFileFilterUsed(false);
 				// Filtra as extensoes de arquivos suportadas, nesse caso, unicamente JPEG
@@ -154,7 +153,6 @@ public class EditarRegistro extends JFrame {
 					if(msgErro.equals("")) {
 						if(imagemAlterada) {
 							try {
-								System.out.println(caminhoImagemFinado);
 								copiaImagem(caminhoImagemFinado, String.valueOf(fin.getID()));
 							} catch (IOException e1) {
 								JOptionPane.showMessageDialog(null, "Erro ao copiar imagem para o banco");
