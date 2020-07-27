@@ -8,9 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import codigos.Finado;
-import codigos.RegistroFinados;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -29,15 +26,19 @@ import java.util.Collections;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Busca extends JFrame {
+// Imports do programa
+import codigos.Finado;
+import codigos.RegistroFinados;
 
+public class Busca extends JFrame {
+	// Atributos da interface
 	private JPanel contentPane;
 	private JTable table;
 	private DefaultTableModel tableModel;
-	private boolean verificaTexto = false;
 	private JButton btnAplicar;
 	private JButton btnVoltar;
 	private JList<String[]> list;
+	// Atributos importantes
 	RegistroFinados registro;
 	
 	public Busca() {
@@ -56,26 +57,29 @@ public class Busca extends JFrame {
 	
 	private void handleEvents() {
 		
+		// Ao clicar no botão Aplicar iremos ordenar a tabela pelo parametro escolhido
 		btnAplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				switch(list.getSelectedIndex()) {
-				case 0: // Busca por ID
+				case 0: // Ordena por ID
 					RegistroFinados.ordenaLista(registro.lista, "ID");
 					break;
-				case 1: // Busca por nome
+				case 1: // Ordena por nome
 					RegistroFinados.ordenaLista(registro.lista, "NOME");
 					break;
-				case 2:// Busca por data de nascimento
+				case 2:// Ordena por data de nascimento
 					RegistroFinados.ordenaLista(registro.lista, "DATANASC");
 					break;
-				case 3: // Busca por data de falecimento
+				case 3: // Ordena por data de falecimento
 					RegistroFinados.ordenaLista(registro.lista, "DATAFALEC");
 					Collections.reverse(registro.lista);
 					break;
 				}
 				
+				// Limpa a tabela
 				tableModel.setNumRows(0);
+				// Imprime novamente na ordem desejada
 				for(Finado finado : registro.lista) {
 					tableModel.addRow(new String[] {
 						String.valueOf(finado.getID()),
@@ -87,6 +91,7 @@ public class Busca extends JFrame {
 			}
 		});
 		
+		// Botao Voltar fecha a tela e reordena a lista por ID
 		btnVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

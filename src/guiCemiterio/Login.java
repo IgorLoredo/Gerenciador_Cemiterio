@@ -65,6 +65,7 @@ public class Login extends JFrame {
 			}
 		});
 		
+		// Verifica usuario e senha
 		btnEntrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

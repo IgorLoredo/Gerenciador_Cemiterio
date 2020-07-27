@@ -59,8 +59,10 @@ public class EditarRegistro extends JFrame {
 	private JButton btnProcurar;
 	private JLabel lblImagem;
 	private JTextArea txtDescricao;
-	private boolean registroValido = false;
 	private JLabel lblRegistroNaoEncontrado;
+
+	// Atributos importantos
+	private boolean registroValido = false;
 	private Finado fin = null;
 	private RegistroFinados registro = null;
 	private boolean imagemAlterada = false;
@@ -79,13 +81,15 @@ public class EditarRegistro extends JFrame {
 	}
 	
 	private void eventsHandler() {
+		// Botao carregar, busca e puxa informações de um registro
 		btnCarregar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// Busca registro, se encontrar carrega informacao, se nao aparece mensagem
 				if(!VerificacaoDeInputs.verificaDocumento(txtId.getText())) {
 					fin = registro.buscaRegristo(txtId.getText(), "ID");
-
+					
+					// Caso o registro seja valido, imprime as informacoes nos campos
 					if(fin != null) {
 						registroValido = true;
 						txtNome.setText(fin.getNome());
@@ -105,6 +109,7 @@ public class EditarRegistro extends JFrame {
 			}
 		});
 		
+		// Botao Procurar -> Busca nova imagem para registro
 		btnProcurar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -132,12 +137,13 @@ public class EditarRegistro extends JFrame {
 			}
 		});
 		
+		// Salva as alteracoes em um registro
 		btnSalvarESair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// Caso o registro seja valido, salvar as alteracoes
 				if(registroValido) {
-					// TODO fazer alteracao no registro
+					// Verifica se campos sao validos
 					String msgErro="";
 					if(VerificacaoDeInputs.verificaNome(txtNome.getText()))
 						msgErro += "Nome Invalido\n";
@@ -150,6 +156,7 @@ public class EditarRegistro extends JFrame {
 					if(VerificacaoDeInputs.verificaDocumento(txtDocumento.getText()))
 						msgErro += "Documento Invalido\n";					
 					
+					// Se nao houverem mensagens de erro contunua executando
 					if(msgErro.equals("")) {
 						if(imagemAlterada) {
 							try {
@@ -158,8 +165,10 @@ public class EditarRegistro extends JFrame {
 								JOptionPane.showMessageDialog(null, "Erro ao copiar imagem para o banco");
 							}
 						}
+						// Escreve alteracoes no registro fin
 						fin.setNome(txtNome.getText());
 						fin.setSobrenome(txtSobrenome.getText());
+						fin.setDescricao(txtDescricao.getText());
 						fin.setCPF(txtDocumento.getText());
 						fin.setDataDeNascimento(txtDataNasc.getText());
 						fin.setDataSepultamento(txtDataFalec.getText());
@@ -177,7 +186,8 @@ public class EditarRegistro extends JFrame {
 				}
 			}
 		});
-	
+		
+		// Botao Voltar fecha a tela
 		btnVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

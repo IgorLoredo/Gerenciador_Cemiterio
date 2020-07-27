@@ -94,6 +94,7 @@ public class Incluir extends JFrame {
 	}
 	
 	private void eventsHandler() {
+		// Procura imagem no file chooser
 		btnProcurar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -122,6 +123,7 @@ public class Incluir extends JFrame {
 			}
 		});
 		
+		// Fecha e volta para Home sem salvar
 		btnVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -130,6 +132,7 @@ public class Incluir extends JFrame {
 			}
 		});
 		
+		// Fecha e volta para Home salvando alteracoes feitas
 		btnSalvarESair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

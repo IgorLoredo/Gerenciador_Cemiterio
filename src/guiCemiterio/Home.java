@@ -40,6 +40,7 @@ public class Home extends JFrame {
 	private JButton btnRegistrarFinado;
 	private JButton btnEditarRegistro;
 	private JButton btnSalvarESair;
+	// Registros a serem utilizado nas outras funcoes
 	private RegistroFinados registro;
 	
 	public Home() {
@@ -55,6 +56,7 @@ public class Home extends JFrame {
 	}
 	
 	private void eventsHandler() {
+		// Abre tela de busca
 		btnBuscarFinado.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -71,6 +73,7 @@ public class Home extends JFrame {
 			}
 		});
 		
+		// Abre tela de Memorial
 		btnVisualizarMemorial.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -87,6 +90,7 @@ public class Home extends JFrame {
 			}
 		});
 
+		// Abre tela de Registro
 		btnRegistrarFinado.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -102,21 +106,8 @@ public class Home extends JFrame {
 				});
 			}
 		});
-
-		btnSalvarESair.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO lembrar de salvar os arquivos em seus respectivos CSV
-				try {
-					ManipularCSV.EscreverCSVFinados("Finados.csv", registro.lista);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				Home.this.dispose();
-			}
-		});
 		
+		// Abre tela de edicao de registros 
 		btnEditarRegistro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -132,6 +123,20 @@ public class Home extends JFrame {
 				});
 			}
 		});
+
+		// Salva alteracoes em um CSV
+		btnSalvarESair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					ManipularCSV.EscreverCSVFinados("Finados.csv", registro.lista);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				Home.this.dispose();
+			}
+		});
+		
 	}
 	
 	
