@@ -97,7 +97,7 @@ public class RegistroFinados {
 			Collections.sort(lista, new Comparator<Finado>() {
 				@Override
 				public int compare(Finado fin1, Finado fin2) {	
-					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		            Date date1 = null;
 		            Date date2 = null;
 					try {
@@ -112,18 +112,25 @@ public class RegistroFinados {
 			});			
 			break;
 			
-		/*case "DATAFALESC": 
+		case "DATAFALEC": 
 			Collections.sort(lista,new Comparator<Finado>() {
 
 				@Override
 				public int compare(Finado fin1, Finado fin2) {
-					
-					return fin1.getDataSepultamento().compareTo(fin2.getDataSepultamento());
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		            Date date1 = null;
+		            Date date2 = null;
+					try {
+						date1 = sdf.parse(fin1.getDataSepultamento());
+						date2 = sdf.parse(fin2.getDataSepultamento());
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return date1.compareTo(date2);
 				}				
 				});
-			
-			break;*/
-		
+			break;
 		}
 	}
 }

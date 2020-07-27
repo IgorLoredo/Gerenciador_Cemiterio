@@ -25,6 +25,7 @@ import java.awt.Color;
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Collections;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -41,6 +42,7 @@ public class Busca extends JFrame {
 	
 	public Busca() {
 		setTitle("Gerenciador de Cemiterio - Busca");
+		registro = new RegistroFinados();
 		initComponents();
 		handleEvents();
 	}
@@ -56,6 +58,7 @@ public class Busca extends JFrame {
 		
 		btnAplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 				switch(list.getSelectedIndex()) {
 				case 0: // Busca por ID
 					RegistroFinados.ordenaLista(registro.lista, "ID");
@@ -64,8 +67,11 @@ public class Busca extends JFrame {
 					RegistroFinados.ordenaLista(registro.lista, "NOME");
 					break;
 				case 2:// Busca por data de nascimento
+					RegistroFinados.ordenaLista(registro.lista, "DATANASC");
 					break;
 				case 3: // Busca por data de falecimento
+					RegistroFinados.ordenaLista(registro.lista, "DATAFALEC");
+					Collections.reverse(registro.lista);
 					break;
 				}
 				
@@ -84,6 +90,7 @@ public class Busca extends JFrame {
 		btnVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				RegistroFinados.ordenaLista(registro.lista, "ID");
 				Busca.this.dispose();
 			}
 		});
@@ -159,16 +166,30 @@ public class Busca extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnAplicar)
 							.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-						.addComponent(lblBuscarPor, Alignment.LEADING))
+						.addComponent(lblBuscarPor))
 					.addGap(29)
 					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 383, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
+		
+		
+		list = new JList<String[]>();
+		scrollPane.setViewportView(list);
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"ID", "Nome", "Data de Nascimento", "Data de Falecimento"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		list.setSelectedIndex(0);
 		
 		tableModel = new DefaultTableModel();
 		table = new JTable(tableModel);
@@ -185,19 +206,6 @@ public class Busca extends JFrame {
 				finado.getDataSepultamento(),
 			});
 		}
-		
-		
-		list = new JList<String[]>();
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"ID", "Nome", "Data de Nascimento", "Data de Falecimento"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		scrollPane.setViewportView(list);
 		contentPane.setLayout(gl_contentPane);
 	}
 }
