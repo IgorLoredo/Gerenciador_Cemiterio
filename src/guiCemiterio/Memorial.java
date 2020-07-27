@@ -53,6 +53,7 @@ public class Memorial extends JFrame {
 	}
 	
 	private void eventsHandler() {
+		// Busca e imprime registro
 		btnCarregar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -64,6 +65,7 @@ public class Memorial extends JFrame {
 			}
 		});
 		
+		// Visualiza o registro anterior
 		btnAnterior.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -80,6 +82,7 @@ public class Memorial extends JFrame {
 			}
 		});
 		
+		// Visualiza o proximo registro
 		btnProximo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -95,6 +98,7 @@ public class Memorial extends JFrame {
 			}
 		});
 		
+		// Volta para Home
 		btnVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
