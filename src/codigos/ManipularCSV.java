@@ -33,7 +33,7 @@ public class ManipularCSV {
 				
 				reg.incluirRegistro(finado);
 			}
-			
+			System.out.println("Leitura Feita!!");
 		} catch (Exception e) {
 			System.out.println("ERRO LEITURA");
 			e.printStackTrace();
