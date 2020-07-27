@@ -50,41 +50,40 @@ public class ManipularCSV {
 		FileWriter fileWriter = null;			
 		//nome, sobrenome, cpf, data de nascimento, telefone grau de paranteco
 		fileWriter = new FileWriter(path);
-
-		for(Finado fin : lista) {
-			// adiciona o finado
-			fileWriter.append(String.valueOf( fin.getID()));
-			fileWriter.append(";");	
-			fileWriter.append(fin.getNome());
-			fileWriter.append(";");	
-			fileWriter.append(fin.getSobrenome());
-			fileWriter.append(";");	
-			fileWriter.append(fin.getCPF());
-			fileWriter.append(";");	
-			fileWriter.append(fin.getDataDeNascimento());
-			fileWriter.append(";");	
-			fileWriter.append(fin.getDataSepultamento());
-			fileWriter.append(";");				
-			fileWriter.append(fin.getDescricao());
-			fileWriter.append(";");	
-				
-			// Adiciona o parente responsavel do finado
-			fileWriter.append(fin.parente.getNome());
-			fileWriter.append(";");		
-			fileWriter.append(fin.parente.getSobrenome());
-			fileWriter.append(";");		
-			fileWriter.append(fin.parente.getCPF());
-			fileWriter.append(";");		
-			fileWriter.append(fin.parente.getDataDeNascimento());
-			fileWriter.append(";");		
-			fileWriter.append(fin.parente.getTelefone());
-			fileWriter.append(";");		
-			fileWriter.append(fin.parente.getGrauParentesco());
-			fileWriter.append(";");	
-			fileWriter.append(fin.parente.getEmail());
-			fileWriter.append("\n");					
-		}
 		try { 
+			for(Finado fin : lista) {
+				// adiciona o finado
+				fileWriter.append(String.valueOf( fin.getID()));
+				fileWriter.append(";");	
+				fileWriter.append(fin.getNome());
+				fileWriter.append(";");	
+				fileWriter.append(fin.getSobrenome());
+				fileWriter.append(";");	
+				fileWriter.append(fin.getCPF());
+				fileWriter.append(";");	
+				fileWriter.append(fin.getDataDeNascimento());
+				fileWriter.append(";");	
+				fileWriter.append(fin.getDataSepultamento());
+				fileWriter.append(";");				
+				fileWriter.append(fin.getDescricao());
+				fileWriter.append(";");	
+					
+				// Adiciona o parente responsavel do finado
+				fileWriter.append(fin.parente.getNome());
+				fileWriter.append(";");		
+				fileWriter.append(fin.parente.getSobrenome());
+				fileWriter.append(";");		
+				fileWriter.append(fin.parente.getCPF());
+				fileWriter.append(";");		
+				fileWriter.append(fin.parente.getDataDeNascimento());
+				fileWriter.append(";");		
+				fileWriter.append(fin.parente.getTelefone());
+				fileWriter.append(";");		
+				fileWriter.append(fin.parente.getGrauParentesco());
+				fileWriter.append(";");	
+				fileWriter.append(fin.parente.getEmail());
+				fileWriter.append("\n");					
+			}			
 			fileWriter.flush();
 			fileWriter.close();
 			System.out.println("Arquivo atualizado");
