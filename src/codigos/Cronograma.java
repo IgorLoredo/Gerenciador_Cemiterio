@@ -17,6 +17,7 @@ public class Cronograma {
 		this.cronograma.add(a);
 	}
 		
+	@SuppressWarnings("null")
 	public ArrayList<Atividade> pesquisaData(String data1, String data2){
 		ArrayList<Atividade> listaDividida = null;
 		for(int i=0; i < this.cronograma.size();i++) {
